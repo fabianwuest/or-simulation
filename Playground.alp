@@ -891,13 +891,67 @@ upstreamCrossLine.storeVehicleFromUpstream(vehicle);]]></Action>
 					</Properties>
 				</ActionChartElement>
 				<ActionChartElement Class="ForLoop">
+					<Id>1724524575472</Id>
+					<Name><![CDATA[forLoop]]></Name>
+					<X>170</X><Y>1000</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties CollectionIterator="true" Width="160" Height="30" Previous="1724524450940" Next="1724170303204" BodyAction="1724524608880" >
+						<FillColor/>
+
+						<Initializer><![CDATA[int i = 0]]></Initializer>
+						<Condition><![CDATA[i < 10]]></Condition>
+						<Counting><![CDATA[i++]]></Counting>
+						<Item><![CDATA[Block b]]></Item>
+						<Collection><![CDATA[this.blocks]]></Collection>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1724524608880</Id>
+					<Name><![CDATA[code2]]></Name>
+					<X>170</X><Y>1050</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="160" Height="40" Previous="1724524575472" >
+						<FillColor/>
+						<Code><![CDATA[// Hide Network of Blocks.
+b.network.setVisible(false);]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1724170303204</Id>
+					<Name><![CDATA[returnStatement]]></Name>
+					<X>170</X><Y>1130</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1724524575472" >
+						<FillColor/>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1724524450940</Id>
+					<Name><![CDATA[code]]></Name>
+					<X>170</X><Y>900</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="180" Height="80" Previous="1724179684965" Next="1724524575472" >
+						<FillColor/>
+						<Code><![CDATA[// Hide Network of Line.
+this.network.setVisible(false);]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="ForLoop">
 					<Id>1724179684965</Id>
 					<Name><![CDATA[forLoop1]]></Name>
 					<X>170</X><Y>700</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties CollectionIterator="false" Width="200" Height="30" Previous="1724170302559" Next="1724170303204" BodyAction="1724179688228" >
+					<Properties CollectionIterator="false" Width="200" Height="30" Previous="1724170302559" Next="1724524450940" BodyAction="1724179688228" >
 						<FillColor/>
 
 						<Initializer><![CDATA[int i = 0]]></Initializer>
@@ -920,17 +974,6 @@ block.set_id(i);
 
 double availableBlockWidth = this.spaceWidth() / blocks.size();
 block.setXY((availableBlockWidth * i), 0);]]></Code>
-					</Properties>	
-				</ActionChartElement>
-				<ActionChartElement Class="Return">
-					<Id>1724170303204</Id>
-					<Name><![CDATA[returnStatement]]></Name>
-					<X>170</X><Y>900</Y>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="80" Height="20" Previous="1724179684965" >
-						<FillColor/>
 					</Properties>	
 				</ActionChartElement>
 			</ActionChartElements>
@@ -3042,13 +3085,37 @@ this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryActi
 					</Properties>
 				</ActionChartElement>
 				<ActionChartElement Class="Code">
+					<Id>1724524352899</Id>
+					<Name><![CDATA[code2]]></Name>
+					<X>210</X><Y>940</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="240" Height="40" Previous="1724442275667" Next="1724424556554" >
+						<FillColor/>
+						<Code><![CDATA[// Hide Network.
+this.network.setVisible(false);]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1724424556554</Id>
+					<Name><![CDATA[returnStatement]]></Name>
+					<X>210</X><Y>1000</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1724524352899" >
+						<FillColor/>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
 					<Id>1724442275667</Id>
 					<Name><![CDATA[code]]></Name>
 					<X>210</X><Y>830</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties Width="400" Height="90" Previous="1724424575847" Next="1724424556554" >
+					<Properties Width="400" Height="90" Previous="1724424575847" Next="1724524352899" >
 						<FillColor/>
 						<Code><![CDATA[// Dynamically adjust connector height to link blocks.
 if(amountLines > 2) {
@@ -3057,17 +3124,6 @@ if(amountLines > 2) {
 	connectorBase.setHeight(connectorBase.getHeight() + heightAdj);
 	connectorMiddle.setHeight(connectorMiddle.getHeight() + heightAdj);
 }]]></Code>
-					</Properties>	
-				</ActionChartElement>
-				<ActionChartElement Class="Return">
-					<Id>1724424556554</Id>
-					<Name><![CDATA[returnStatement]]></Name>
-					<X>210</X><Y>940</Y>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="80" Height="20" Previous="1724442275667" >
-						<FillColor/>
 					</Properties>	
 				</ActionChartElement>
 				<ActionChartElement Class="ForLoop">
