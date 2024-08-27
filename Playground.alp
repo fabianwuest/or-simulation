@@ -8517,7 +8517,6 @@ this.configNumberOfLines = value + 5;
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
 						<Editable>false</Editable>
-						<Button><![CDATA[]]></Button>
 						<Button><![CDATA[custom]]></Button>
 						<Button><![CDATA[uniform]]></Button>
 						<LinkTo>true</LinkTo>
