@@ -239,6 +239,11 @@ line.initLine();]]></Code>
 CrossLine crossLine = this.crossLines.get(i);
 crossLine.setXY(location.getX(), location.getY());
 crossLine.set_id(i);
+if (i == 0) {
+	crossLine.set_isCrossLineUpstream(true);
+} else {
+	crossLine.set_isCrossLineUpstream(false);
+}
 crossLine.initCrossLine(this.lines.size());]]></Code>
 					</Properties>	
 				</ActionChartElement>
@@ -481,6 +486,9 @@ upstreamCrossLine.storeVehicleFromUpstream(vehicle);]]></Action>
 					<Parameters>
 						<Parameter>
 							<Name><![CDATA[id]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[isCrossLineUpstream]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
@@ -3277,7 +3285,7 @@ this.car.setVisible(false);]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724506161373</Id>
 					<Name><![CDATA[vehicle]]></Name>
-					<X>830</X><Y>170</Y>
+					<X>830</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3289,7 +3297,7 @@ this.car.setVisible(false);]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724506164064</Id>
 					<Name><![CDATA[leavingVehicle]]></Name>
-					<X>830</X><Y>200</Y>
+					<X>830</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3301,7 +3309,7 @@ this.car.setVisible(false);]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724509504574</Id>
 					<Name><![CDATA[enterNetworkIdx]]></Name>
-					<X>830</X><Y>230</Y>
+					<X>830</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3329,6 +3337,27 @@ There should be only two CrossLine agents in this model.]]></Description>
 						<ParameterEditor>
 							<Id>1724424489997</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1724751717187</Id>
+					<Name><![CDATA[isCrossLineUpstream]]></Name>
+					<X>830</X><Y>160</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1724751717185</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -3493,14 +3522,14 @@ this.vehicle.moveToInTime(pointWait, 6, SECOND);]]></EntryAction>
 					<Properties Width="140" Height="30">
 						<EntryAction><![CDATA[// Make dynamic.
 int targetIdx;
-if (this.id == 1) {
-	// Move to Downstream.
-	targetIdx = 0;
-} else {
+if (this.isCrossLineUpstream) {
 	// Move to Line.
 	Random random = new Random();
 	targetIdx = random.nextInt(main.lines.size());
 	this.vehicle.targetLineId = targetIdx;
+} else {
+	// Move to Downstream.
+	targetIdx = 0;
 }
 
 PointNode pointWaitDestination = this.collectionPointsWait.get(targetIdx);
@@ -3536,11 +3565,12 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
 					<Properties Width="140" Height="30">
 						<EntryAction><![CDATA[// Make dynamic.
 PointNode pointExitDestination;
-if (this.id == 1) {
-	pointExitDestination = this.collectionPointsExit.get(0);
-} else {
+if (this.isCrossLineUpstream) {
 	pointExitDestination = this.collectionPointsExit.get(this.leavingVehicle.targetLineId);
+} else {
+	pointExitDestination = this.collectionPointsExit.get(0);
 }
+
 this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -3554,13 +3584,14 @@ this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryActi
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
-						<EntryAction><![CDATA[if(this.id == 0) {
+						<EntryAction><![CDATA[if (this.isCrossLineUpstream) {
 	// Make dynamic.
 	Line targetLine = main.lines.get(this.leavingVehicle.targetLineId);
 	this.moveVehicleToLine(this.leavingVehicle, targetLine);
 } else {
 	this.moveVehicleToExit(this.leavingVehicle);
-}
+}	
+
 this.leavingVehicle = null;]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -3863,7 +3894,7 @@ this.leavingVehicle = null;]]></EntryAction>
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[this.id == 1]]></Condition>
+						<Condition><![CDATA[!this.isCrossLineUpstream]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
@@ -4068,7 +4099,7 @@ this.collectionBlocks.get(i).setVisible(true);]]></Code>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724446688337</Id>
 					<Name><![CDATA[storeVehicleFromUpstream]]></Name>
-					<X>830</X><Y>270</Y>
+					<X>830</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4088,7 +4119,7 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724446749255</Id>
 					<Name><![CDATA[moveVehicleToLine]]></Name>
-					<X>830</X><Y>300</Y>
+					<X>830</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4108,7 +4139,7 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724446812825</Id>
 					<Name><![CDATA[moveVehicleToExit]]></Name>
-					<X>830</X><Y>360</Y>
+					<X>830</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4123,7 +4154,7 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724515866358</Id>
 					<Name><![CDATA[storeVehicleFromLine]]></Name>
-					<X>830</X><Y>330</Y>
+					<X>830</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
