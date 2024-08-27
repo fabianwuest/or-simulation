@@ -2761,7 +2761,7 @@ main.crossLines.get(1).storeVehicleFromLine(this.leavingVehicle, this.line);]]><
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[int]]></Type>
+						<Type><![CDATA[ColorOption]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<ParameterEditor>
@@ -2804,13 +2804,13 @@ main.crossLines.get(1).storeVehicleFromLine(this.leavingVehicle, this.line);]]><
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[/*
-Since setColor for Shape3DObjects is only supported starting from AnyLogic version 8.3,
-we create objects with the required colors and keep only the necessary color visible for each instance.
+* Since setColor for Shape3DObjects is only supported starting from AnyLogic version 8.3,
+* we create objects with the required colors and keep only the necessary color visible for each instance.
 */
 
 Shape3DObject selected3DObject;
 for (int i=0; i<10; i++) {
-	if (this.color == i+1) { // Colors begin at index 1.
+	if (this.color.ordinal() == i) { // Match based on the index of the enum.
 		selected3DObject = this.collectionCar3DObject.get(i);
 		// Place selected 3DObject at center.
 		selected3DObject.setX(0);
@@ -7013,8 +7013,8 @@ this.network.setVisible(false);]]></StartupCode>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[int randomColor = (int) (Math.random() * 10) + 1;
-Vehicle vehicle = new Vehicle(randomColor);
+					<Body><![CDATA[ColorOption selectedColor = colorVehicleDistribution();
+Vehicle vehicle = new Vehicle(selectedColor);
 vehicle.markParametersAreSet();
 this.vehicle = vehicle;
 this.enterUpstream.take(vehicle);
