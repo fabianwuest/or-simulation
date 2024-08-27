@@ -210,6 +210,27 @@ initSourceUpstream();]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1724788938472</Id>
+					<Name><![CDATA[colorVehicleDistribution]]></Name>
+					<X>-120</X><Y>580</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[String]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1724788938470</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1724174760455</Id>
 					<Name><![CDATA[collectionLineMarkups]]></Name>
@@ -673,6 +694,9 @@ upstreamCrossLine.storeVehicleFromUpstream(vehicle);]]></Action>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[TAKTTIME]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[selectedColorVehicleDistribution]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -6606,7 +6630,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724680704547</Id>
 					<Name><![CDATA[vehicle]]></Name>
-					<X>580</X><Y>260</Y>
+					<X>580</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6618,7 +6642,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724680707753</Id>
 					<Name><![CDATA[leavingVehicle]]></Name>
-					<X>580</X><Y>290</Y>
+					<X>580</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6630,7 +6654,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724683741795</Id>
 					<Name><![CDATA[isOperational]]></Name>
-					<X>580</X><Y>230</Y>
+					<X>580</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6707,6 +6731,30 @@ this.network.setVisible(false);]]></StartupCode>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1724683137252</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1724789357080</Id>
+					<Name><![CDATA[selectedColorVehicleDistribution]]></Name>
+					<X>580</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[String]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[main.colorVehicleDistribution]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1724789357078</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -6930,9 +6978,9 @@ this.network.setVisible(false);]]></StartupCode>
 						<Point><X>0</X><Y>-200</Y></Point>
 					</Points>
 					<IconOffset>130.0</IconOffset>
-					<Properties Source="1724680602627" Target="1724680554381" Trigger="condition">
+					<Properties Source="1724680602627" Target="1724680554381" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[0]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -7020,9 +7068,9 @@ this.network.setVisible(false);]]></StartupCode>
 						<Point><X>0</X><Y>-70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724682539163" Target="1724682475957" Trigger="condition">
+					<Properties Source="1724682539163" Target="1724682475957" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[0]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -7098,52 +7146,26 @@ this.network.setVisible(false);]]></StartupCode>
 					</Properties>	
 				</StatechartElement>
 			</StatechartElements>
-			<Events>
-				<Event>
-					<Id>1724679233682</Id>
-					<Name><![CDATA[createVehicles]]></Name>
-					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>740</X><Y>140</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties TriggerType="timeout" Mode="cyclic">
-						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
-						</Timeout>
-						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
-						</Rate>
-						<OccurrenceAtTime>true</OccurrenceAtTime>
-						<OccurrenceDate>1724745600000</OccurrenceDate>
-						<OccurrenceTime Class="CodeUnitValue">
-							<Code><![CDATA[0]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
-						</OccurrenceTime>
-						<RecurrenceCode Class="CodeUnitValue">
-							<Code><![CDATA[57]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
-						</RecurrenceCode>
-						<Condition><![CDATA[false]]></Condition>
-					</Properties>
-					<Action><![CDATA[this.createNewVehicle();]]></Action>
-				</Event>
-			</Events>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724679296553</Id>
 					<Name><![CDATA[createNewVehicle]]></Name>
-					<X>580</X><Y>330</Y>
+					<X>580</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[ColorOption selectedColor = colorVehicleDistribution();
+					<Body><![CDATA[ColorOption selectedColor;
+
+if (this.selectedColorVehicleDistribution == "custom") {
+	selectedColor = this.colorVehicleCustomDistribution();
+} else {
+	// if this.selectedColorVehicleDistribution == "uniform"
+	selectedColor = this.colorVehicleUniformDistribution();
+}
+
 Vehicle vehicle = new Vehicle(selectedColor);
 vehicle.markParametersAreSet();
 this.vehicle = vehicle;
@@ -7159,7 +7181,7 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724680352098</Id>
 					<Name><![CDATA[moveToCrossLine]]></Name>
-					<X>580</X><Y>360</Y>
+					<X>580</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7172,8 +7194,8 @@ this.leavingVehicle = null;]]></Body>
 			<CustomDistributions>
 				<CustomDistribution>
 					<Id>1724757336449</Id>
-					<Name><![CDATA[colorVehicleDistribution]]></Name>
-					<X>580</X><Y>400</Y>
+					<Name><![CDATA[colorVehicleCustomDistribution]]></Name>
+					<X>580</X><Y>430</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7262,7 +7284,7 @@ this.leavingVehicle = null;]]></Body>
 				<CustomDistribution>
 					<Id>1724759826709</Id>
 					<Name><![CDATA[colorVehicleUniformDistribution]]></Name>
-					<X>580</X><Y>430</Y>
+					<X>580</X><Y>460</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8217,6 +8239,21 @@ this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);]]></Bo
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1724788773858</Id>
+					<Name><![CDATA[configColorVehicleDistribution]]></Name>
+					<X>1020</X><Y>450</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[String]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA["custom"]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 			</Variables>
 
 			<Shapes>
@@ -8322,7 +8359,29 @@ this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);]]></Bo
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[OutputStrategy]]></Text>
+					<Text><![CDATA[Output Strategy:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1724788757412</Id>
+					<Name><![CDATA[labelColorVehicleDistribution]]></Name>
+					<X>700</X><Y>420</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Color Vehicle Distribution:]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>11</Size>
@@ -8439,6 +8498,32 @@ this.configNumberOfLines = value + 5;
 						<LinkTo>false</LinkTo>
 					</ExtendedProperties>
 				</Control>
+				<Control Type="ComboBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1724788750094</Id>
+					<Name><![CDATA[comboboxColorVehicleDistribution]]></Name>
+					<X>700</X><Y>450</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="140" Height="20" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<Editable>false</Editable>
+						<Button><![CDATA[]]></Button>
+						<Button><![CDATA[custom]]></Button>
+						<Button><![CDATA[uniform]]></Button>
+						<LinkTo>true</LinkTo>
+						<Link>configColorVehicleDistribution</Link>
+					</ExtendedProperties>
+				</Control>
 			</Controls>
 
 			<Parameters>			
@@ -8458,6 +8543,12 @@ this.configNumberOfLines = value + 5;
 					<ParameterName><![CDATA[outputStrategy]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[this.configOutputStrategy]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[colorVehicleDistribution]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configColorVehicleDistribution]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>			
