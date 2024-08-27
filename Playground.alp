@@ -2070,7 +2070,7 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
 						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[30]]></Code>
+							<Code><![CDATA[1.0/2000]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
 						<MessageType><![CDATA[Vehicle]]></MessageType>
@@ -2672,6 +2672,18 @@ main.crossLines.get(1).storeVehicleFromLine(this.leavingVehicle, this.line);]]><
 			</ScaleRuler>
 			<ConnectionsId>1724169624700</ConnectionsId>
 			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1724703570594</Id>
+					<Name><![CDATA[targetLineId]]></Name>
+					<X>110</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1724169639309</Id>
 					<Name><![CDATA[color]]></Name>
@@ -3480,13 +3492,18 @@ this.vehicle.moveToInTime(pointWait, 6, SECOND);]]></EntryAction>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
 						<EntryAction><![CDATA[// Make dynamic.
-int targetIdx = 3;
+int targetIdx;
 if (this.id == 1) {
+	// Move to Downstream.
 	targetIdx = 0;
+} else {
+	// Move to Line.
+	Random random = new Random();
+	targetIdx = random.nextInt(main.lines.size());
+	this.vehicle.targetLineId = targetIdx;
 }
 
 PointNode pointWaitDestination = this.collectionPointsWait.get(targetIdx);
-
 
 double tripeTime = Math.abs(targetIdx - this.enterNetworkIdx) * 6.0;
 this.vehicle.moveToInTime(pointWaitDestination, tripeTime, SECOND);]]></EntryAction>
@@ -3518,7 +3535,12 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
 						<EntryAction><![CDATA[// Make dynamic.
-PointNode pointExitDestination = this.collectionPointsExit.get(3);
+PointNode pointExitDestination;
+if (this.id == 1) {
+	pointExitDestination = this.collectionPointsExit.get(0);
+} else {
+	pointExitDestination = this.collectionPointsExit.get(this.leavingVehicle.targetLineId);
+}
 this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -3534,10 +3556,12 @@ this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryActi
 					<Properties Width="140" Height="30">
 						<EntryAction><![CDATA[if(this.id == 0) {
 	// Make dynamic.
-	this.moveVehicleToLine(this.leavingVehicle, main.lines.get(3));
+	Line targetLine = main.lines.get(this.leavingVehicle.targetLineId);
+	this.moveVehicleToLine(this.leavingVehicle, targetLine);
 } else {
 	this.moveVehicleToExit(this.leavingVehicle);
-}]]></EntryAction>
+}
+this.leavingVehicle = null;]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
