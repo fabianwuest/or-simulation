@@ -1679,7 +1679,21 @@ firstBlock.storeVehicle(vehicle);]]></Body>
 						<EntryAction><![CDATA[this.leavingVehicle = this.vehicle;
 this.vehicle = null;
 this.occupied = false;
-this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
+this.statechartExiting.receiveMessage(this.leavingVehicle);
+
+/*
+* Manually trigger the onChange() of the previous Block
+* so that it's condition of the WaitingBlock can be evaluated 
+* and Vehicle can automatically proceed to the next Block.
+* This is necessary because the condition would not be triggered
+* by AnyLogic, as no actual change occurs in the previous 
+* Block Agent when a Vehicle in the following Block leaves and 
+* the Block's occupied variable becomes false.
+*/ 
+int prevBlockId = this.id - 1;
+if (prevBlockId >= 0) {
+	this.line.blocks.get(prevBlockId).onChange();
+}]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -1883,9 +1897,9 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
 						<Point><X>0</X><Y>-200</Y></Point>
 					</Points>
 					<IconOffset>130.0</IconOffset>
-					<Properties Source="1724357608746" Target="1724356956155" Trigger="condition">
+					<Properties Source="1724357608746" Target="1724356956155" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[0]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -1945,9 +1959,9 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);]]></EntryAction>
 						<Point><X>0</X><Y>-350</Y></Point>
 					</Points>
 					<IconOffset>230.0</IconOffset>
-					<Properties Source="1724273745088" Target="1724269828591" Trigger="condition">
+					<Properties Source="1724273745088" Target="1724269828591" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[0]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
