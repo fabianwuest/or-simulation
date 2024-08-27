@@ -7981,7 +7981,7 @@ this.leavingVehicle = null;]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties Width="460" Height="430" Previous="1724768826649" Next="1724761505691" >
+					<Properties Width="460" Height="370" Previous="1724768826649" Next="1724761505691" >
 						<FillColor/>
 						<Code><![CDATA[int nLines = main.lines.size();
 
@@ -8005,23 +8005,18 @@ if (isLineOccupied) {
 		
 		// If we've checked all Lines and they're all occupied, break the loop.
 		if (targetLineId == originalTargetLineId) {
-			return -1;
+			targetLineId = -1;
+			break;
 		}
 	
 	} while (isLineOccupied);
-	
-	return targetLineId;
-
-} else {
-	return targetLineId;
-}
-]]></Code>
+}]]></Code>
 					</Properties>	
 				</ActionChartElement>
 				<ActionChartElement Class="Return">
 					<Id>1724761505691</Id>
 					<Name><![CDATA[returnStatement]]></Name>
-					<X>240</X><Y>1230</Y>
+					<X>240</X><Y>1170</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
