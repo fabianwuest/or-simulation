@@ -7946,8 +7946,8 @@ this.leavingVehicle = null;]]></Body>
 			<ActionChartElements>
 				<ActionChartElement Class="ActionChart">
 					<Id>1724761504488</Id>
-					<Name><![CDATA[strategy0]]></Name>
-					<X>150</X><Y>680</Y>
+					<Name><![CDATA[inputStrategy0]]></Name>
+					<X>240</X><Y>680</Y>
 					<Label><X>-30</X><Y>-10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7965,7 +7965,7 @@ this.leavingVehicle = null;]]></Body>
 				<ActionChartElement Class="LocalVariable">
 					<Id>1724768826649</Id>
 					<Name><![CDATA[targetLineId]]></Name>
-					<X>150</X><Y>730</Y>
+					<X>240</X><Y>730</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -7977,20 +7977,51 @@ this.leavingVehicle = null;]]></Body>
 				<ActionChartElement Class="Code">
 					<Id>1724768737811</Id>
 					<Name><![CDATA[code]]></Name>
-					<X>150</X><Y>780</Y>
+					<X>240</X><Y>780</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties Width="220" Height="60" Previous="1724768826649" Next="1724761505691" >
+					<Properties Width="460" Height="430" Previous="1724768826649" Next="1724761505691" >
 						<FillColor/>
-						<Code><![CDATA[System.out.println("This is strategy0");
-System.out.println(color);]]></Code>
+						<Code><![CDATA[int nLines = main.lines.size();
+
+// Choose random line.
+Random random = new Random();
+targetLineId = random.nextInt(main.lines.size());
+
+// Check if first Block in Line is occupied.
+boolean isLineOccupied = main.lines.get(targetLineId).blocks.get(0).isOccupied();
+
+if (isLineOccupied) {
+	/*
+	* If a Line is occupied, check the adjacent Line with the next higher index.
+	* If the last Line is reached, start again from the Line at index 0.
+	*/
+	int originalTargetLineId = targetLineId;
+	
+	do {
+		targetLineId = (targetLineId + 1) % nLines;
+		isLineOccupied = main.lines.get(targetLineId).blocks.get(0).isOccupied();
+		
+		// If we've checked all Lines and they're all occupied, break the loop.
+		if (targetLineId == originalTargetLineId) {
+			return -1;
+		}
+	
+	} while (isLineOccupied);
+	
+	return targetLineId;
+
+} else {
+	return targetLineId;
+}
+]]></Code>
 					</Properties>	
 				</ActionChartElement>
 				<ActionChartElement Class="Return">
 					<Id>1724761505691</Id>
 					<Name><![CDATA[returnStatement]]></Name>
-					<X>150</X><Y>860</Y>
+					<X>240</X><Y>1230</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -8039,7 +8070,7 @@ return targetLineId;]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Populate the dispatch table.
-this.strategiesDispatchTable.put("strategy0", this::strategy0);]]></Body>
+this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
