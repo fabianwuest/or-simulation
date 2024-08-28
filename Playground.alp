@@ -8829,8 +8829,7 @@ this.network.setVisible(false);]]></StartupCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="210">
-						<EntryAction><![CDATA[this.isOperational = true;
-this.requestNewVehicle();]]></EntryAction>
+						<EntryAction><![CDATA[this.isOperational = true;]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -8984,6 +8983,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1724794093500" Target="1724794118389" Trigger="condition">
+						<Action><![CDATA[this.requestNewVehicle();]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1000]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
