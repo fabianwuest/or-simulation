@@ -2057,7 +2057,7 @@ firstBlock.storeVehicle(vehicle);]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724163547113</Id>
 					<Name><![CDATA[vehicle]]></Name>
-					<X>740</X><Y>260</Y>
+					<X>740</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2069,13 +2069,25 @@ firstBlock.storeVehicle(vehicle);]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724352862387</Id>
 					<Name><![CDATA[leavingVehicle]]></Name>
-					<X>740</X><Y>290</Y>
+					<X>740</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[Vehicle]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1724864160837</Id>
+					<Name><![CDATA[vehicleReadyToLeave]]></Name>
+					<X>740</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
 					</Properties>
 				</Variable>
 				<Variable Class="Parameter">
@@ -2212,6 +2224,8 @@ firstBlock.storeVehicle(vehicle);]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
+						<EntryAction><![CDATA[this.vehicleReadyToLeave = true;]]></EntryAction>
+						<ExitAction><![CDATA[this.vehicleReadyToLeave = false;]]></ExitAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -2307,6 +2321,8 @@ if (prevBlockId >= 0) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
+						<EntryAction><![CDATA[this.vehicleReadyToLeave = true;]]></EntryAction>
+						<ExitAction><![CDATA[this.vehicleReadyToLeave = false;]]></ExitAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -2657,7 +2673,7 @@ if (prevBlockId >= 0) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724163630906</Id>
 					<Name><![CDATA[storeVehicle]]></Name>
-					<X>740</X><Y>330</Y>
+					<X>740</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2679,7 +2695,7 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724163655695</Id>
 					<Name><![CDATA[moveToNextBlock]]></Name>
-					<X>740</X><Y>390</Y>
+					<X>740</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2693,7 +2709,7 @@ line.blocks.get(id+1).storeVehicle(leavingVehicle);
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1724163692277</Id>
 					<Name><![CDATA[isOccupied]]></Name>
-					<X>740</X><Y>360</Y>
+					<X>740</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2705,7 +2721,7 @@ line.blocks.get(id+1).storeVehicle(leavingVehicle);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724668519617</Id>
 					<Name><![CDATA[moveToCrossLine]]></Name>
-					<X>740</X><Y>450</Y>
+					<X>740</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2719,13 +2735,25 @@ main.crossLines.get(1).storeVehicleFromLine(this.leavingVehicle, this.line);]]><
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724848525254</Id>
 					<Name><![CDATA[exitingVehicleToCrossLine]]></Name>
-					<X>740</X><Y>420</Y>
+					<X>740</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[String msg = "exitingVehicleToCrossLine";
 this.statechartEntering.receiveMessage(msg);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1724864183536</Id>
+					<Name><![CDATA[isVehicleReadyToLeave]]></Name>
+					<X>740</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return this.vehicleReadyToLeave;]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -10085,13 +10113,13 @@ this.vehicle = null;]]></Code>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties Width="460" Height="330" Previous="1724797347227" Next="1724797290684" >
+					<Properties Width="460" Height="710" Previous="1724797347227" Next="1724797290684" >
 						<FillColor/>
 						<Code><![CDATA[Random random = new Random();
 int nLines = main.lines.size();
 
 boolean foundMatchingColor = false;
-boolean foundOccupiedLine = false;
+boolean foundReadyToLeave = false;
 
 // Start by picking a random line
 requestingLineId = random.nextInt(nLines);
@@ -10103,8 +10131,8 @@ do {
     // Check the last block in the current line
     Block lastBlock = main.lines.get(requestingLineId).blocks.get(7);
     
-    if (lastBlock.isOccupied()) {
-        foundOccupiedLine = true; // We've found at least one occupied line
+    if (lastBlock.isVehicleReadyToLeave()) {
+        foundReadyToLeave = true; // We've found at least one occupied line
 
         // Check if the car in the last block has the same color as the previous car
         if (lastBlock.vehicle.color == colorPrevVehicle) {
@@ -10118,14 +10146,26 @@ do {
 
 } while (requestingLineId != originalRequestingLineId);
 
+// If no matching color was found, look for any line where the vehicle is ready to leave
 if (!foundMatchingColor) {
-    if (foundOccupiedLine) {
-        // If no line with a matching color was found, but there is at least one occupied line,
-        // use the last occupied line found.
-        // (requestingLineId already points to it)
-    } else {
-        // If no occupied line was found, pick a random line.
-        requestingLineId = random.nextInt(nLines);
+    originalRequestingLineId = requestingLineId; // Reset the starting point for the new search
+
+    do {
+        Block lastBlock = main.lines.get(requestingLineId).blocks.get(7);
+
+        if (lastBlock.isVehicleReadyToLeave()) {
+            foundReadyToLeave = true;
+            break; // We found a line with a vehicle ready to leave, no need to continue
+        }
+
+        // Move to the next line, wrapping around using modulo
+        requestingLineId = (requestingLineId + 1) % nLines;
+
+    } while (requestingLineId != originalRequestingLineId);
+
+    // If still no ready vehicle was found, throw an exception
+    if (!foundReadyToLeave) {
+        throw new IllegalStateException("No line found with a vehicle ready to leave.");
     }
 }]]></Code>
 					</Properties>	
@@ -10133,7 +10173,7 @@ if (!foundMatchingColor) {
 				<ActionChartElement Class="Return">
 					<Id>1724797290684</Id>
 					<Name><![CDATA[returnStatement]]></Name>
-					<X>240</X><Y>1130</Y>
+					<X>240</X><Y>1510</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
