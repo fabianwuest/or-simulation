@@ -10088,30 +10088,46 @@ this.vehicle = null;]]></Code>
 					<Properties Width="460" Height="330" Previous="1724797347227" Next="1724797290684" >
 						<FillColor/>
 						<Code><![CDATA[Random random = new Random();
-int randomLineId = random.nextInt(main.lines.size());
+int nLines = main.lines.size();
 
-requestingLineId = randomLineId;
+boolean foundMatchingColor = false;
+boolean foundOccupiedLine = false;
 
-// Start checking from the randomly selected line
-int totalLines = main.lines.size();
-while (!main.lines.get(requestingLineId).blocks(7).isOccupied()) {
-    // Move to the next line
-    requestingLineId++;
+// Start by picking a random line
+requestingLineId = random.nextInt(nLines);
 
-    // Wrap around to the beginning if we've reached the end of the list
-    if (requestingLineId >= totalLines) {
-        requestingLineId = 0;
+// Store the original starting point to detect if all lines have been checked
+int originalRequestingLineId = requestingLineId;
+
+do {
+    // Check the last block in the current line
+    Block lastBlock = main.lines.get(requestingLineId).blocks.get(7);
+    
+    if (lastBlock.isOccupied()) {
+        foundOccupiedLine = true; // We've found at least one occupied line
+
+        // Check if the car in the last block has the same color as the previous car
+        if (lastBlock.vehicle.color == colorPrevVehicle) {
+            foundMatchingColor = true;
+            break; // We found a matching line, no need to continue
+        }
     }
 
-    // If we have checked all lines and none are occupied, you might want to handle this case
-    // e.g., break out of the loop or throw an exception.
-    if (requestingLineId == randomLineId) {
-        throw new IllegalStateException("No available line found with block 7 occupied.");
-    }
-}
+    // Move to the next line, wrapping around using modulo
+    requestingLineId = (requestingLineId + 1) % nLines;
 
-// Now, `requestingLineId` contains the ID of the first line where block 7 is occupied
-]]></Code>
+} while (requestingLineId != originalRequestingLineId);
+
+if (!foundMatchingColor) {
+    if (foundOccupiedLine) {
+        // If no line with a matching color was found, but there is at least one occupied line,
+        // use the last occupied line found.
+        // (requestingLineId already points to it)
+    } else {
+        // If no occupied line was found, pick a random line.
+        requestingLineId = random.nextInt(nLines);
+    }
+}]]></Code>
 					</Properties>	
 				</ActionChartElement>
 				<ActionChartElement Class="Return">
@@ -10121,9 +10137,46 @@ while (!main.lines.get(requestingLineId).blocks(7).isOccupied()) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Properties Width="80" Height="20" Previous="1724797334568" >
+					<Properties Width="120" Height="20" Previous="1724797334568" >
 						<FillColor/>
 						<Return><![CDATA[requestingLineId]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1724862598758</Id>
+					<Name><![CDATA[code1]]></Name>
+					<X>750</X><Y>780</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="460" Height="330" >
+						<FillColor/>
+						<Code><![CDATA[Random random = new Random();
+int nLines = main.lines.size();
+
+// Choose a random line to start with.
+requestingLineId = random.nextInt(nLines);
+
+// Check if the 7th Block in the chosen Line is occupied.
+boolean isBlockOccupied = main.lines.get(requestingLineId).blocks.get(7).isOccupied();
+
+// Store the original starting point to detect if all lines have been checked.
+int originalRequestingLineId = requestingLineId;
+
+while (!isBlockOccupied) {
+    // Move to the next line, wrapping around using modulo.
+    requestingLineId = (requestingLineId + 1) % nLines;
+
+    // Check if the block on the new line is occupied.
+    isBlockOccupied = main.lines.get(requestingLineId).blocks.get(7).isOccupied();
+
+    // If we've checked all lines and none are occupied, handle the case.
+    if (requestingLineId == originalRequestingLineId) {
+        throw new IllegalStateException("No available line found with block 7 occupied.");
+    }
+}
+
+// After the loop, `requestingLineId` will be the ID of the first line found where block 7 is occupied.]]></Code>
 					</Properties>	
 				</ActionChartElement>
 			</ActionChartElements>
