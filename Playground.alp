@@ -2568,7 +2568,7 @@ if (prevBlockId >= 0) {
 						<Point><X>70</X><Y>70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724666382453" Target="1724273745088" Trigger="rate">
+					<Properties Source="1724666382453" Target="1724273745088" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -2578,10 +2578,10 @@ if (prevBlockId >= 0) {
 							<Code><![CDATA[1.0/2000]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Vehicle]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["exitingVehicleToCrossLine"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -2640,7 +2640,7 @@ line.blocks.get(id+1).storeVehicle(leavingVehicle);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724668519617</Id>
 					<Name><![CDATA[moveToCrossLine]]></Name>
-					<X>740</X><Y>420</Y>
+					<X>740</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2648,6 +2648,19 @@ line.blocks.get(id+1).storeVehicle(leavingVehicle);
 					<Body><![CDATA[// System.out.println("Reached last block");
 main.nOccupiedBlocksTotal--;
 main.crossLines.get(1).storeVehicleFromLine(this.leavingVehicle, this.line);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1724848525254</Id>
+					<Name><![CDATA[exitingVehicleToCrossLine]]></Name>
+					<X>740</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[String msg = "exitingVehicleToCrossLine";
+this.statechartEntering.receiveMessage(msg);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -4089,7 +4102,7 @@ this.leavingVehicle.moveToInTime(pointExitDestination, 6, SECOND);]]></EntryActi
 	Line targetLine = main.lines.get(this.leavingVehicle.targetLineId);
 	this.moveVehicleToLine(this.leavingVehicle, targetLine);
 } else {
-	this.moveVehicleToExit(this.leavingVehicle);
+	this.moveVehicleToDownstream(this.leavingVehicle);
 }	
 
 this.leavingVehicle = null;]]></EntryAction>
@@ -4495,10 +4508,10 @@ true]]></Condition>
 							<Code><![CDATA[30]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["exitingVehicleToDownstream"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -4638,8 +4651,8 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724446812825</Id>
-					<Name><![CDATA[moveVehicleToExit]]></Name>
-					<X>830</X><Y>390</Y>
+					<Name><![CDATA[moveVehicleToDownstream]]></Name>
+					<X>830</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4648,6 +4661,8 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 						<Name><![CDATA[vehicle]]></Name>
 						<Type><![CDATA[Vehicle]]></Type>
 					</Parameter>
+					<Body><![CDATA[SinkDownstream downstream = main.sinkDownstream;
+downstream.storeVehicleFromCrossLine(vehicle);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -4672,6 +4687,20 @@ this.statechartEntering.receiveMessage(vehicle);]]></Body>
 this.enterCrossLine.take(vehicle);
 this.vehicle = vehicle;
 this.statechartEntering.receiveMessage(vehicle);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1724844670233</Id>
+					<Name><![CDATA[exitingVehicleToDownstream]]></Name>
+					<Description><![CDATA[Trigger exiting process for Vehicle moving towards CrossLine exit/SinkDownstream entry.]]></Description>
+					<X>830</X><Y>390</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[String msg = "exitingVehicleToDownstream";
+this.statechartEntering.receiveMessage(msg);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -8530,6 +8559,18 @@ this.network.setVisible(false);]]></StartupCode>
 						<Type><![CDATA[boolean]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1724846166808</Id>
+					<Name><![CDATA[vehicle]]></Name>
+					<X>670</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[Vehicle]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1724793838233</Id>
 					<Name><![CDATA[TAKTTIME]]></Name>
@@ -8605,9 +8646,9 @@ this.network.setVisible(false);]]></StartupCode>
 			</Variables>
 			<Connectors>
 				<Connector>
-					<Id>1724795601598</Id>
+					<Id>1724851250151</Id>
 					<Name><![CDATA[connector]]></Name>
-					<X>50</X><Y>70</Y>
+					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8625,6 +8666,39 @@ this.network.setVisible(false);]]></StartupCode>
 					<TargetEmbeddedObjectReference>
 						<PackageName><![CDATA[playground]]></PackageName>
 						<ClassName><![CDATA[SinkDownstream]]></ClassName>
+						<ItemName><![CDATA[delay]]></ItemName>
+					</TargetEmbeddedObjectReference>
+					<TargetConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Delay]]></ClassName>
+						<ItemName><![CDATA[in]]></ItemName>
+					</TargetConnectableItemReference>
+					<Points>
+						<Point><X>50</X><Y>70</Y></Point>
+						<Point><X>190</X><Y>70</Y></Point>
+					</Points>
+				</Connector>
+				<Connector>
+					<Id>1724851250153</Id>
+					<Name><![CDATA[connector1]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<SourceEmbeddedObjectReference>
+						<PackageName><![CDATA[playground]]></PackageName>
+						<ClassName><![CDATA[SinkDownstream]]></ClassName>
+						<ItemName><![CDATA[delay]]></ItemName>
+					</SourceEmbeddedObjectReference>
+					<SourceConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Delay]]></ClassName>
+						<ItemName><![CDATA[out]]></ItemName>
+					</SourceConnectableItemReference>
+					<TargetEmbeddedObjectReference>
+						<PackageName><![CDATA[playground]]></PackageName>
+						<ClassName><![CDATA[SinkDownstream]]></ClassName>
 						<ItemName><![CDATA[sink]]></ItemName>
 					</TargetEmbeddedObjectReference>
 					<TargetConnectableItemReference>
@@ -8633,8 +8707,8 @@ this.network.setVisible(false);]]></StartupCode>
 						<ItemName><![CDATA[in]]></ItemName>
 					</TargetConnectableItemReference>
 					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>210</X><Y>0</Y></Point>
+						<Point><X>230</X><Y>70</Y></Point>
+						<Point><X>260</X><Y>70</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -8662,7 +8736,8 @@ this.network.setVisible(false);]]></StartupCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="210">
-						<EntryAction><![CDATA[this.isOperational = true;]]></EntryAction>
+						<EntryAction><![CDATA[this.isOperational = true;
+this.requestNewVehicle();]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -8680,13 +8755,15 @@ this.network.setVisible(false);]]></StartupCode>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794159944</Id>
-					<Name><![CDATA[Requesting]]></Name>
+					<Name><![CDATA[Processing]]></Name>
 					<X>50</X><Y>420</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
+						<EntryAction><![CDATA[String msg = "processNextVehicle";
+this.statechartProcessing.receiveMessage(msg);]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -8705,7 +8782,7 @@ this.network.setVisible(false);]]></StartupCode>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724795319644</Id>
-					<Name><![CDATA[EnteringIdle]]></Name>
+					<Name><![CDATA[ProcessingIdle]]></Name>
 					<X>330</X><Y>170</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -8718,7 +8795,36 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724795404310</Id>
 					<Name><![CDATA[VehicleEntering]]></Name>
-					<X>330</X><Y>270</Y>
+					<X>330</X><Y>370</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="140" Height="30">
+						<EntryAction><![CDATA[this.vehicle.moveToInTime(this.pointEnd, 6, SECOND);]]></EntryAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1724795427990</Id>
+					<Name><![CDATA[RequestingNextVehicle]]></Name>
+					<X>330</X><Y>570</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="140" Height="30">
+						<EntryAction><![CDATA[this.requestNewVehicle();]]></EntryAction>
+						<ExitAction><![CDATA[this.delay.stopDelay(this.vehicle);
+
+// this.vehicle.moveToInTime(this.sink, 0, SECOND);]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1724843640044</Id>
+					<Name><![CDATA[VehicleEntered]]></Name>
+					<X>330</X><Y>470</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8728,14 +8834,16 @@ this.network.setVisible(false);]]></StartupCode>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
-					<Id>1724795427990</Id>
-					<Name><![CDATA[VehicleEntered]]></Name>
-					<X>330</X><Y>370</Y>
+					<Id>1724845560869</Id>
+					<Name><![CDATA[InitiatingVehicleEnter]]></Name>
+					<X>330</X><Y>270</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
+						<EntryAction><![CDATA[CrossLine downstreamCrossLine = main.crossLines(1);
+downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -8921,7 +9029,7 @@ this.network.setVisible(false);]]></StartupCode>
 				</StatechartElement>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1724795321973</Id>
-					<Name><![CDATA[stateChartEntering]]></Name>
+					<Name><![CDATA[statechartProcessing]]></Name>
 					<X>400</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -8947,7 +9055,7 @@ this.network.setVisible(false);]]></StartupCode>
 						<Point><X>0</X><Y>70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724795319644" Target="1724795404310" Trigger="timeout">
+					<Properties Source="1724795319644" Target="1724845560869" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -8957,32 +9065,32 @@ this.network.setVisible(false);]]></StartupCode>
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["processNextVehicle"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724795474868</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>400</X><Y>300</Y>
+					<X>400</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>1</X><Y>70</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724795404310" Target="1724795427990" Trigger="timeout">
+					<Properties Source="1724795404310" Target="1724843640044" Trigger="condition">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[true]]></Condition>
+						<Condition><![CDATA[!this.vehicle.isMoving()]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
@@ -8997,7 +9105,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724795491532</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>470</X><Y>390</Y>
+					<X>470</X><Y>590</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9005,8 +9113,8 @@ this.network.setVisible(false);]]></StartupCode>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>30</X><Y>0</Y></Point>
-						<Point><X>30</X><Y>-200</Y></Point>
-						<Point><X>0</X><Y>-200</Y></Point>
+						<Point><X>30</X><Y>-400</Y></Point>
+						<Point><X>0</X><Y>-400</Y></Point>
 					</Points>
 					<IconOffset>130.0</IconOffset>
 					<Properties Source="1724795427990" Target="1724795319644" Trigger="timeout">
@@ -9056,29 +9164,110 @@ this.network.setVisible(false);]]></StartupCode>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1724843699889</Id>
+					<Name><![CDATA[transition7]]></Name>
+					<X>400</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1724843640044" Target="1724795427990" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1724845624168</Id>
+					<Name><![CDATA[transition8]]></Name>
+					<X>400</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1724845560869" Target="1724795404310" Trigger="message">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[String]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["vehicleEntering"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
 			</StatechartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724794756509</Id>
-					<Name><![CDATA[getVehicleFromCrossLine]]></Name>
-					<X>670</X><Y>290</Y>
+					<Name><![CDATA[storeVehicleFromCrossLine]]></Name>
+					<X>670</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[vehicle]]></Name>
+						<Type><![CDATA[Vehicle]]></Type>
+					</Parameter>
+					<Body><![CDATA[this.enterDownstream.take(vehicle);
+this.vehicle = vehicle;
+String msg = "vehicleEntering";
+this.statechartProcessing.receiveMessage(msg);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724794777878</Id>
 					<Name><![CDATA[requestNewVehicle]]></Name>
-					<X>670</X><Y>320</Y>
+					<X>670</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[ColorOption colorPrevVehicle;
+
+if (this.vehicle == null) {
+	// true if requesting first Vehicle.
+	colorPrevVehicle = null;
+} else {
+ 	colorPrevVehicle = this.vehicle.color;
+}
+
+int requestingLineId = main.outputControl.getRequestingLineId(colorPrevVehicle);
+Line outputLine = main.lines.get(requestingLineId);
+Block lastBlockInLine = outputLine.blocks.get(outputLine.blocks.size()-1);
+lastBlockInLine.exitingVehicleToCrossLine();]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -9102,7 +9291,7 @@ this.network.setVisible(false);]]></StartupCode>
 					<StatechartReference>
 						<PackageName><![CDATA[playground]]></PackageName>
 						<ClassName><![CDATA[SinkDownstream]]></ClassName>
-						<ItemName><![CDATA[stateChartEntering]]></ItemName>
+						<ItemName><![CDATA[statechartProcessing]]></ItemName>
 					</StatechartReference>
 					<LineStyle>SOLID</LineStyle>
 					<LineWidth>1</LineWidth>
@@ -9278,9 +9467,116 @@ this.network.setVisible(false);]]></StartupCode>
 					<Parameters>
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[// Statistics here.
+this.vehicle = null;]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[destroyEntity]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InitialSpeedCode Class="CodeUnitValue">
+						<Code><![CDATA[10]]></Code>
+						<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+					</InitialSpeedCode>
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1724851248775</Id>
+					<Name><![CDATA[delay]]></Name>
+					<X>190</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Delay]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+							<ClassName><![CDATA[Delay]]></ClassName>
+							<ItemName><![CDATA[1412336242930]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[type]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[self.MANUAL]]></Code>
+							</Value>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[delayTime]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[capacity]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[maximumCapacity]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[entityLocation]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[pushProtocol]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[restoreEntityLocationOnExit]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[forceStatisticsCollection]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onEnter]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onAtExit]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onExit]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[onRemove]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -9564,6 +9860,7 @@ this.network.setVisible(false);]]></StartupCode>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
 			<Import><![CDATA[import java.util.function.Function;]]></Import>
+			<StartupCode><![CDATA[this.buildStrategiesDispatchTable();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724796327869</Id>
@@ -9723,6 +10020,31 @@ this.network.setVisible(false);]]></StartupCode>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="460" Height="200" Previous="1724797347227" Next="1724797290684" >
 						<FillColor/>
+						<Code><![CDATA[Random random = new Random();
+int randomLineId = random.nextInt(main.lines.size());
+
+requestingLineId = randomLineId;
+
+// Start checking from the randomly selected line
+int totalLines = main.lines.size();
+while (!main.lines.get(requestingLineId).blocks(7).isOccupied()) {
+    // Move to the next line
+    requestingLineId++;
+
+    // Wrap around to the beginning if we've reached the end of the list
+    if (requestingLineId >= totalLines) {
+        requestingLineId = 0;
+    }
+
+    // If we have checked all lines and none are occupied, you might want to handle this case
+    // e.g., break out of the loop or throw an exception.
+    if (requestingLineId == randomLineId) {
+        throw new IllegalStateException("No available line found with block 7 occupied.");
+    }
+}
+
+// Now, `requestingLineId` contains the ID of the first line where block 7 is occupied
+]]></Code>
 					</Properties>	
 				</ActionChartElement>
 				<ActionChartElement Class="Return">
