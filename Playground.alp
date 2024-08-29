@@ -1545,6 +1545,30 @@ return fillLevel;]]></Body>
 			</ScaleRuler>
 			<ConnectionsId>1724162157558</ConnectionsId>
 			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1724943549633</Id>
+					<Name><![CDATA[lastVehicleInLine]]></Name>
+					<X>20</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[Vehicle]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1724943565410</Id>
+					<Name><![CDATA[nVehiclesInLine]]></Name>
+					<X>20</X><Y>370</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1724170664076</Id>
 					<Name><![CDATA[id]]></Name>
@@ -1690,7 +1714,8 @@ block.setXY((availableBlockWidth * i), 0);]]></Code>
 						<Type><![CDATA[Vehicle]]></Type>
 					</Parameter>
 					<Body><![CDATA[Block firstBlock = this.blocks.get(0);
-firstBlock.storeVehicle(vehicle);]]></Body>
+firstBlock.storeVehicle(vehicle);
+this.onVehicleEnterUpdateLineProperties(vehicle);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1713,6 +1738,48 @@ firstBlock.storeVehicle(vehicle);]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1724943607742</Id>
+					<Name><![CDATA[onVehicleLeaveUpdateLineProperties]]></Name>
+					<X>20</X><Y>440</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[leavingVehicle]]></Name>
+						<Type><![CDATA[Vehicle]]></Type>
+					</Parameter>
+					<Body><![CDATA[// Update lastVehilceInLine
+if (this.lastVehicleInLine == leavingVehicle) {
+	this.lastVehicleInLine = null;
+}
+
+// Update nVehiclesInLine
+this.nVehiclesInLine--;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1724943686384</Id>
+					<Name><![CDATA[onVehicleEnterUpdateLineProperties]]></Name>
+					<X>20</X><Y>410</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[enteringVehicle]]></Name>
+						<Type><![CDATA[Vehicle]]></Type>
+					</Parameter>
+					<Body><![CDATA[// Update lastVehilceInLine
+this.lastVehicleInLine = enteringVehicle;
+
+// Update nVehiclesInLine
+this.nVehiclesInLine++;]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -2297,6 +2364,7 @@ if (prevBlockId >= 0) {
 	this.moveToNextBlock();
 } else {
 	this.moveToCrossLine();
+	this.line.onVehicleLeaveUpdateLineProperties(this.leavingVehicle);
 }]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -8457,6 +8525,87 @@ if (isLineOccupied) {
 						<Return><![CDATA[targetLineId]]></Return>
 					</Properties>	
 				</ActionChartElement>
+				<ActionChartElement Class="ActionChart">
+					<Id>1724942918213</Id>
+					<Name><![CDATA[inputStrategy1]]></Name>
+					<X>860</X><Y>680</Y>
+					<Label><X>-30</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties AccessType="default" StaticFunction="false" Width="20" Height="20" Next="1724943007562" >
+						<FillColor/>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1724943041919</Id>
+					<Name><![CDATA[code1]]></Name>
+					<X>860</X><Y>780</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="400" Height="380" Previous="1724943007562" Next="1724942921700" >
+						<FillColor/>
+						<Code><![CDATA[ArrayList<Line> possibleLines = new ArrayList<>();
+ArrayList<Line> allLines = new ArrayList<>();
+for (Line l : main.lines) {
+	allLines.add(l);
+}
+
+possibleLines = allLines;
+possibleLines.removeIf(line -> line.nVehiclesInLine == 8);
+
+possibleLines = this.getLinesWithLastVehicleSameColor(color, possibleLines);
+
+
+if (!possibleLines.isEmpty()) {
+	possibleLines = this.getShortestLine(possibleLines);
+} else {
+	possibleLines = this.getShortestLine(allLines);
+}
+
+try {
+	targetLineId = possibleLines.get(0).id;
+} catch (IndexOutOfBoundsException e) {
+	throw new IllegalStateException("All lines are occupied.");
+}
+
+/*	
+if (possibleLines.get(0).nVehiclesInLine == 8) {
+	throw new IllegalStateException("All lines are occupied. Check if necessary?");
+}*/]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1724942921700</Id>
+					<Name><![CDATA[returnStatement1]]></Name>
+					<X>860</X><Y>1180</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1724943041919" >
+						<FillColor/>
+						<Return><![CDATA[targetLineId]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1724943007562</Id>
+					<Name><![CDATA[targetLineId]]></Name>
+					<X>860</X><Y>730</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="140" Height="30" Constant="false" Previous="1724942918213" Next="1724943041919" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+					</Properties>	
+				</ActionChartElement>
 			</ActionChartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -8497,7 +8646,79 @@ return targetLineId;]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Populate the dispatch table.
-this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);]]></Body>
+this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);
+this.strategiesDispatchTable.put("inputStrategy1", this::inputStrategy1);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ArrayList<Line>]]></ReturnType>
+					<Id>1724945685650</Id>
+					<Name><![CDATA[getLinesWithLastVehicleSameColor]]></Name>
+					<X>1030</X><Y>700</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[lines]]></Name>
+						<Type><![CDATA[ArrayList<Line>]]></Type>
+					</Parameter>
+					<Body><![CDATA[ArrayList<Line> linesWithLastVehicleSameColor = new ArrayList<>();
+
+for (Line l : lines) {
+	if (l.lastVehicleInLine == null) {
+		continue;
+	}
+
+	if (l.lastVehicleInLine.color == color) {
+		linesWithLastVehicleSameColor.add(l);
+	}
+}
+
+return linesWithLastVehicleSameColor;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ArrayList<Line>]]></ReturnType>
+					<Id>1724945803985</Id>
+					<Name><![CDATA[getShortestLine]]></Name>
+					<X>1030</X><Y>740</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[lines]]></Name>
+						<Type><![CDATA[ArrayList<Line>]]></Type>
+					</Parameter>
+					<Body><![CDATA[ArrayList<Line> shortestLine = new ArrayList<>();
+
+if (lines == null || lines.isEmpty()) {
+	return shortestLine;
+}
+
+// Initialize the minimum size with the first element's size
+int minSize = lines.get(0).nVehiclesInLine;
+
+// Find the smallest size
+for (Line l : lines) {
+	if (l.nVehiclesInLine < minSize) {
+		minSize = l.nVehiclesInLine;
+	}
+}
+
+// Collect all lines with the smalles size
+for (Line l : lines) {
+	if (l.nVehiclesInLine == minSize) {
+ 		shortestLine.add(l);
+	}
+} 
+
+return shortestLine;]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -11309,6 +11530,7 @@ this.configNumberOfLines = value + 5;
 						<Font Name="Dialog" Size="11" Style="0"/>
 						<Editable>false</Editable>
 						<Button><![CDATA[inputStrategy0]]></Button>
+						<Button><![CDATA[inputStrategy1]]></Button>
 						<LinkTo>true</LinkTo>
 						<Link>configInputStrategy</Link>
 					</ExtendedProperties>
