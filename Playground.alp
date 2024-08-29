@@ -10309,6 +10309,7 @@ return requestingLineId;]]></Body>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
+			<StartupCode><![CDATA[this.initBlockSizePerColor();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724861265080</Id>
@@ -10457,6 +10458,21 @@ return requestingLineId;]]></Body>
 						<Type><![CDATA[double]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1724934190907</Id>
+					<Name><![CDATA[blockSizePerColor]]></Name>
+					<X>410</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[HashMap<ColorOption, Map<String, Double>>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new HashMap<>()]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 			</Variables>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -10473,7 +10489,9 @@ return requestingLineId;]]></Body>
 						<Name><![CDATA[vehicle]]></Name>
 						<Type><![CDATA[Vehicle]]></Type>
 					</Parameter>
-					<Body><![CDATA[ColorOption currentColor = vehicle.color;
+					<Body><![CDATA[ColorOption _lastColor = lastColor;
+
+ColorOption currentColor = vehicle.color;
 
 if (lastColor == null) {
 	// First vehicle arriving
@@ -10493,7 +10511,42 @@ if (lastColor == null) {
     // Start a new block
     lastColor = currentColor;
     currentBlockSize = 1;
-}]]></Body>
+}
+
+/*
+// For Per Color Basis
+// Per-color block size tracking
+if (_lastColor == null) {
+    // Initialize the per-color block data for the first vehicle
+    blockSizePerColor.get(currentColor).put("currentBlockSize", 1.0);
+} else if (currentColor == _lastColor) {
+    // Continue the block for the same color
+    double currentBlockSizeForColor = blockSizePerColor.get(currentColor).get("currentBlockSize");
+    blockSizePerColor.get(currentColor).put("currentBlockSize", currentBlockSizeForColor + 1.0);
+} else {
+    // Finalize the block for the last color
+    Map<String, Double> lastColorData = blockSizePerColor.get(_lastColor);
+    double lastColorTotalBlockSize = lastColorData.get("totalBlockSize") + 1;
+    double lastColorSumOfBlockSizes = lastColorData.get("sumOfBlockSizes") + currentBlockSize;
+
+    lastColorData.put("totalBlockSize", lastColorTotalBlockSize);
+    lastColorData.put("sumOfBlockSizes", lastColorSumOfBlockSizes);
+    lastColorData.put("averageBlockSize", lastColorSumOfBlockSizes / lastColorTotalBlockSize);
+
+    // Start a new block for the current color
+    blockSizePerColor.get(currentColor).put("currentBlockSize", 1.0);
+}
+
+// Optionally, update the current color's average block size
+//Map<String, Double> currentColorData = blockSizePerColor.get(currentColor);
+//double currentColorTotalBlockSize = currentColorData.get("totalBlockSize");
+//double currentColorSumOfBlockSizes = currentColorData.get("sumOfBlockSizes");
+//currentColorData.put("averageBlockSize", (double) currentColorSumOfBlockSizes / (currentColorTotalBlockSize > 0 ? currentColorTotalBlockSize : 1));
+
+// System.out.println(currentColorData);
+System.out.println(blockSizePerColor.get(currentColor));
+this.chartBlockSizePerColor.updateData();
+*/]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -10537,6 +10590,27 @@ return (double) sumOfBlockSizes / totalBlocks;]]></Body>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[this.currentAverageBlockSize = this.calculateAverageBlockSize();]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[HashMap<ColorOption, Map<String,Double>>]]></ReturnType>
+					<Id>1724935023387</Id>
+					<Name><![CDATA[initBlockSizePerColor]]></Name>
+					<X>410</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[for (ColorOption c : ColorOption.values()) {
+	Map<String, Double> values = new HashMap<>();
+	
+	values.put("currentBlockSize", 0.0);
+	values.put("totalBlockSize", 0.0);
+	values.put("sumOfBlockSizes", 0.0);
+	values.put("averageBlockSize", 0.0);
+
+	this.blockSizePerColor.put(c, values);
+}]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -10674,6 +10748,119 @@ return (double) sumOfBlockSizes / totalBlocks;]]></Body>
 						<Title><![CDATA[Block Size]]></Title>							
 					</HistogramDataExpression>
     			</Histogram>
+    			<BarChart>
+					<Id>1724938063213</Id>
+					<Name><![CDATA[chartBlockSizePerColor]]></Name>
+					<X>400</X><Y>340</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1725004800000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</RecurrenceCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>440</Width>
+					<Height>240</Height>
+					<BackgroundColor>-1644806</BackgroundColor>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>230</Width>
+						<Height>180</Height>
+						<BackgroundColor>-1644806</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>EAST</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>130</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<Persistent>true</Persistent>
+					<ShowLegend>true</ShowLegend>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.ONE).get("averageBlockSize")]]></Expression>
+					<Color>-1</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[ONE]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.TWO).get("averageBlockSize")]]></Expression>
+					<Color>-16777216</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[TWO]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.THREE).get("averageBlockSize")]]></Expression>
+					<Color>-8355712</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[THREE]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.FOUR).get("averageBlockSize")]]></Expression>
+					<Color>-4144960</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[FOUR]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.FIVE).get("averageBlockSize")]]></Expression>
+					<Color>-16776961</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[FIVE]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.SIX).get("averageBlockSize")]]></Expression>
+					<Color>-65536</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[SIX]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.SEVEN).get("averageBlockSize")]]></Expression>
+					<Color>-2180985</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[SEVEN]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.EIGHT).get("averageBlockSize")]]></Expression>
+					<Color>-16744448</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[EIGHT]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.NINE).get("averageBlockSize")]]></Expression>
+					<Color>-10496</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[NINE]]></Title>
+					</DataItem>
+					<DataItem>
+					<Expression><![CDATA[this.blockSizePerColor.get(ColorOption.TEN).get("averageBlockSize")]]></Expression>
+					<Color>-65281</Color>
+					<Expression2Flag>true</Expression2Flag>
+						<Title><![CDATA[TEN]]></Title>
+					</DataItem>
+					<ScaleFromExpression><![CDATA[0]]></ScaleFromExpression>
+					<ScaleToExpression><![CDATA[1]]></ScaleToExpression>
+					<ScaleType>AUTO</ScaleType>
+					<Bars>
+						<Direction>UP</Direction>
+						<RelativeWidth>0.8</RelativeWidth>
+					</Bars>
+    			</BarChart>
 			</Charts>
 
 		</ActiveObjectClass>
