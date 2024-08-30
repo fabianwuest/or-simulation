@@ -8417,7 +8417,8 @@ this.leavingVehicle = null;]]></Body>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
 			<Import><![CDATA[import java.util.function.Function;]]></Import>
-			<StartupCode><![CDATA[this.buildStrategiesDispatchTable();]]></StartupCode>
+			<StartupCode><![CDATA[this.buildStrategiesDispatchTable();
+this.buildDistributionLookups();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724761028252</Id>
@@ -8507,6 +8508,36 @@ this.leavingVehicle = null;]]></Body>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[HashMap<String, Function<ColorOption, Integer>>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new HashMap<>();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725023511261</Id>
+					<Name><![CDATA[colorVehicleCustomDistributionLookup]]></Name>
+					<X>1110</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[HashMap<ColorOption, Double>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new HashMap<>();]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725023652134</Id>
+					<Name><![CDATA[colorVehicleUniformDistributionLookup]]></Name>
+					<X>1110</X><Y>530</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[HashMap<ColorOption, Double>]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[new HashMap<>();]]></Code>
 						</InitialValue>
@@ -8700,6 +8731,83 @@ if (possibleLines.get(0).nVehiclesInLine == 8) {
 						<Type><![CDATA[int]]></Type>
 					</Properties>	
 				</ActionChartElement>
+				<ActionChartElement Class="ActionChart">
+					<Id>1725024734389</Id>
+					<Name><![CDATA[inputStrategy1_2]]></Name>
+					<X>1470</X><Y>680</Y>
+					<Label><X>-30</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties AccessType="default" StaticFunction="false" Width="20" Height="20" Next="1725024783343" >
+						<FillColor/>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1725024797316</Id>
+					<Name><![CDATA[code2]]></Name>
+					<X>1470</X><Y>780</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="540" Height="330" Previous="1725024783343" Next="1725024738862" >
+						<FillColor/>
+						<Code><![CDATA[ArrayList<Line> possibleLines = new ArrayList<>();
+ArrayList<Line> allLines = new ArrayList<>();
+for (Line l : main.lines) {
+	allLines.add(l);
+}
+
+possibleLines = allLines;
+possibleLines.removeIf(line -> line.nVehiclesInLine == 8);
+
+possibleLines = this.getLinesWithLastVehicleSameColor(color, possibleLines);
+
+
+if (!possibleLines.isEmpty()) {
+	possibleLines = this.getShortestLine(possibleLines);
+} else {
+	possibleLines = this.getShortestLine(allLines);
+	possibleLines = this.getLinesWithLowestColorProbability(possibleLines);
+}
+
+try {
+	targetLineId = possibleLines.get(0).id;
+} catch (IndexOutOfBoundsException e) {
+	throw new IllegalStateException("All lines are occupied.");
+}]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1725024738862</Id>
+					<Name><![CDATA[returnStatement2]]></Name>
+					<X>1470</X><Y>1130</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1725024797316" >
+						<FillColor/>
+						<Return><![CDATA[targetLineId]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1725024783343</Id>
+					<Name><![CDATA[targetLineId]]></Name>
+					<X>1470</X><Y>730</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="140" Height="30" Constant="false" Previous="1725024734389" Next="1725024797316" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+					</Properties>	
+				</ActionChartElement>
 			</ActionChartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -8741,7 +8849,8 @@ return targetLineId;]]></Body>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Populate the dispatch table.
 this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);
-this.strategiesDispatchTable.put("inputStrategy1", this::inputStrategy1);]]></Body>
+this.strategiesDispatchTable.put("inputStrategy1", this::inputStrategy1);
+this.strategiesDispatchTable.put("inputStrategy1_2", this::inputStrategy1_2);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -8813,6 +8922,112 @@ for (Line l : lines) {
 } 
 
 return shortestLine;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ArrayList<Line>]]></ReturnType>
+					<Id>1725021950233</Id>
+					<Name><![CDATA[getLinesWithLowestColorProbability]]></Name>
+					<X>1590</X><Y>700</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[lines]]></Name>
+						<Type><![CDATA[ArrayList<Line>]]></Type>
+					</Parameter>
+					<Body><![CDATA[ArrayList<Line> lowestProbabilityLine = new ArrayList<>();
+
+if (lines == null || lines.isEmpty()) {
+	return lowestProbabilityLine;
+}
+
+// In case shortest lines are empty to prevent NullPointerException.
+// No need to check probabilities.
+if (lines.get(0).lastVehicleInLine == null) {
+	return lines;
+}
+
+double minProbability = this.getProbabilityOfColor(lines.get(0).lastVehicleInLine.color);
+
+// Find the lowest probability
+for (Line l : lines) {
+	ColorOption lastVehicleColor = l.lastVehicleInLine.color;
+	double lastVehiclePropability = this.getProbabilityOfColor(lastVehicleColor);
+	if(lastVehiclePropability < minProbability) {
+		minProbability = lastVehiclePropability;
+	}
+}
+
+// Collect all lines with lowest probability
+for (Line l : lines) {
+	ColorOption lastVehicleColor = l.lastVehicleInLine.color;
+	double lastVehiclePropability = this.getProbabilityOfColor(lastVehicleColor);
+	if (lastVehiclePropability == minProbability) {
+		lowestProbabilityLine.add(l);
+	}
+}
+
+return lowestProbabilityLine;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725022319777</Id>
+					<Name><![CDATA[getProbabilityOfColor]]></Name>
+					<X>1110</X><Y>590</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					<Body><![CDATA[if (main.colorVehicleDistribution == "custom") {
+	return colorVehicleCustomDistributionLookup.get(color);
+} else {
+	// Uniform.
+	return colorVehicleUniformDistributionLookup.get(color);
+}]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725023689365</Id>
+					<Name><![CDATA[buildDistributionLookups]]></Name>
+					<X>1110</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[HashMap<ColorOption, Double> custom = this.colorVehicleCustomDistributionLookup;
+HashMap<ColorOption, Double> uniform = this.colorVehicleUniformDistributionLookup;
+
+// Build custom.
+custom.put(ColorOption.ONE, 36.0);
+custom.put(ColorOption.TWO, 22.0);
+custom.put(ColorOption.THREE, 12.0);
+custom.put(ColorOption.FOUR, 8.0);
+custom.put(ColorOption.FIVE, 8.0);
+custom.put(ColorOption.SIX, 4.0);
+custom.put(ColorOption.SEVEN, 4.0);
+custom.put(ColorOption.EIGHT, 3.0);
+custom.put(ColorOption.NINE, 2.0);
+custom.put(ColorOption.TEN, 1.0);
+
+// Build uniform.
+uniform.put(ColorOption.ONE, 1.0);
+uniform.put(ColorOption.TWO, 1.0);
+uniform.put(ColorOption.THREE, 1.0);
+uniform.put(ColorOption.FOUR, 1.0);
+uniform.put(ColorOption.FIVE, 1.0);
+uniform.put(ColorOption.SIX, 1.0);
+uniform.put(ColorOption.SEVEN, 1.0);
+uniform.put(ColorOption.EIGHT, 1.0);
+uniform.put(ColorOption.NINE, 1.0);
+uniform.put(ColorOption.TEN, 1.0);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -11810,6 +12025,7 @@ this.configNumberOfLines = value + 5;
 						<Editable>false</Editable>
 						<Button><![CDATA[inputStrategy0]]></Button>
 						<Button><![CDATA[inputStrategy1]]></Button>
+						<Button><![CDATA[inputStrategy1_2]]></Button>
 						<LinkTo>true</LinkTo>
 						<Link>configInputStrategy</Link>
 					</ExtendedProperties>
