@@ -10901,6 +10901,89 @@ try {
 						<Type><![CDATA[int]]></Type>
 					</Properties>	
 				</ActionChartElement>
+				<ActionChartElement Class="ActionChart">
+					<Id>1725042041804</Id>
+					<Name><![CDATA[outputStrategy2]]></Name>
+					<X>2050</X><Y>680</Y>
+					<Label><X>-30</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties AccessType="default" StaticFunction="false" Width="20" Height="20" Next="1725042147688" >
+						<FillColor/>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Parameter>
+						<Name><![CDATA[colorPrevVehicle]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1725042175752</Id>
+					<Name><![CDATA[code4]]></Name>
+					<X>2050</X><Y>780</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="520" Height="450" Previous="1725042147688" Next="1725042043479" >
+						<FillColor/>
+						<Code><![CDATA[ArrayList<Line> possibleLines = new ArrayList<>();
+ArrayList<Line> allLines = new ArrayList<>();
+for (Line l : main.lines) {
+	allLines.add(l);
+}
+
+
+possibleLines = allLines;
+possibleLines.removeIf(line -> line.firstVehicleInLine == null);
+
+possibleLines = this.getLinesWithFirstVehicleSameColor(colorPrevVehicle, possibleLines);
+
+
+if (!possibleLines.isEmpty()) {
+	possibleLines = this.getLongestLine(possibleLines);
+} else {
+	possibleLines = this.getLinesWithSecondBlockInSomeFirstBlock(allLines);
+	possibleLines = this.getLinesWithLowestColorProbability(possibleLines);
+
+	if (possibleLines.isEmpty()) {
+		possibleLines = this.getLongestLine(allLines);
+		possibleLines = this.getLinesWithLowestColorProbability(possibleLines);
+	}
+}
+
+try {
+	requestingLineId = possibleLines.get(0).id;
+} catch (IndexOutOfBoundsException e) {
+	throw new IllegalStateException("No vehicle ready to request in all lines.");
+}]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1725042043479</Id>
+					<Name><![CDATA[returnStatement3]]></Name>
+					<X>2050</X><Y>1250</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="140" Height="20" Previous="1725042175752" >
+						<FillColor/>
+						<Return><![CDATA[requestingLineId]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1725042147688</Id>
+					<Name><![CDATA[requestingLineId]]></Name>
+					<X>2050</X><Y>730</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30" Constant="false" Previous="1725042041804" Next="1725042175752" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+					</Properties>	
+				</ActionChartElement>
 			</ActionChartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -10916,7 +10999,8 @@ try {
 					<Body><![CDATA[// Populate the dispatch table.
 this.strategiesDispatchTable.put("outputStrategy0", this::outputStrategy0);
 this.strategiesDispatchTable.put("outputStrategy1", this::outputStrategy1);
-this.strategiesDispatchTable.put("outputStrategy1_2", this::outputStrategy1_2);]]></Body>
+this.strategiesDispatchTable.put("outputStrategy1_2", this::outputStrategy1_2);
+this.strategiesDispatchTable.put("outputStrategy2", this::outputStrategy2);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -11068,6 +11152,84 @@ for (Line l : lines) {
 }
 
 return lowestProbabilityLine;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ArrayList<Line>]]></ReturnType>
+					<Id>1725044638266</Id>
+					<Name><![CDATA[getLinesWithSecondBlockInSomeFirstBlock]]></Name>
+					<X>2200</X><Y>700</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[lines]]></Name>
+						<Type><![CDATA[ArrayList<Line>]]></Type>
+					</Parameter>
+					<Body><![CDATA[ArrayList<Line> linesWithSecondBlockISFB = new ArrayList<>();
+
+if (lines == null || lines.isEmpty()) {
+	return linesWithSecondBlockISFB;
+}
+
+ArrayList<Line> secondBlockCandidates = new ArrayList<>();
+ArrayList<ColorOption> secondBlockCandidatesColor = new ArrayList<>();
+
+// Find lines with two different blocks.
+for (Line l : lines) {
+	ColorOption c = this.getColorInSecondBlock(l);
+	if (c != null) {
+		secondBlockCandidates.add(l);
+		secondBlockCandidatesColor.add(c);
+	}
+}
+
+// Find lines with second block in some first block.
+for (Line l : lines) {
+	for (int i=0; i<secondBlockCandidatesColor.size(); i++) {
+		if (l.firstVehicleInLine.color == secondBlockCandidatesColor.get(i)) {
+			linesWithSecondBlockISFB.add(secondBlockCandidates.get(i));
+		}
+	}
+}
+
+return linesWithSecondBlockISFB;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ColorOption]]></ReturnType>
+					<Id>1725045140534</Id>
+					<Name><![CDATA[getColorInSecondBlock]]></Name>
+					<X>2200</X><Y>670</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[line]]></Name>
+						<Type><![CDATA[Line]]></Type>
+					</Parameter>
+					<Body><![CDATA[ColorOption colorOnFirstBlock;
+
+if (line.firstVehicleInLine == null) {
+	return null;
+} else {
+	colorOnFirstBlock = line.firstVehicleInLine.color;
+}
+
+for (int i = line.blocks.size()-2; i>=0; i--) { // -2 -> don't evaluate first again.
+	Vehicle vehicleInBlock = line.blocks.get(i).vehicle;
+	if (vehicleInBlock != null) {
+		if (vehicleInBlock.color == colorOnFirstBlock) {
+			continue;
+		} else {
+			return vehicleInBlock.color;
+		}
+	}
+}
+
+return null;]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -12178,6 +12340,7 @@ this.configNumberOfLines = value + 5;
 						<Button><![CDATA[outputStrategy0]]></Button>
 						<Button><![CDATA[outputStrategy1]]></Button>
 						<Button><![CDATA[outputStrategy1_2]]></Button>
+						<Button><![CDATA[outputStrategy2]]></Button>
 						<LinkTo>true</LinkTo>
 						<Link>configOutputStrategy</Link>
 					</ExtendedProperties>
