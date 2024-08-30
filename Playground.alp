@@ -281,7 +281,7 @@ initSinkDownstream();]]></StartupCode>
 						<ElementClass><![CDATA[RectangularNode]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 						<CollectionInitializer Class="CodeValue">
-							<Code><![CDATA[{line0, line1, line2, line3, line4, line5}]]></Code>
+							<Code><![CDATA[{ line0, line1, line2, line3, line4, line5, line6 }]]></Code>
 						</CollectionInitializer>
 					</Properties>
 
@@ -670,7 +670,7 @@ return fillLevel;]]></Body>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
-						<Code><![CDATA[6]]></Code>
+						<Code><![CDATA[this.numberOfLines]]></Code>
 					</Replication>
 					<CollectionType>ARRAY_LIST_BASED</CollectionType>
 					<InEnvironment>true</InEnvironment>	
@@ -1142,6 +1142,28 @@ return fillLevel;]]></Body>
 
 			<Shapes>
 				<RectangleNode>
+					<Id>1725007125379</Id>
+					<Name><![CDATA[line6]]></Name>
+					<X>300</X><Y>440</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-14774017</LineColor>
+					<FillColor/>
+					<LineWidth>2</LineWidth>
+					<LineMaterial>null</LineMaterial>
+					<FillMaterial>null</FillMaterial>
+					<LineStyle>DASHED</LineStyle>
+					<AttractorsLayout>random</AttractorsLayout>
+
+					<Width>400</Width>
+					<Height>20</Height>
+					<Rotation>0.0</Rotation>
+				</RectangleNode>
+				<RectangleNode>
 					<Id>1724174627300</Id>
 					<Name><![CDATA[line0]]></Name>
 					<X>300</X><Y>200</Y>
@@ -1312,7 +1334,7 @@ return fillLevel;]]></Body>
 					<AttractorsLayout>random</AttractorsLayout>
 
 					<Width>50</Width>
-					<Height>220</Height>
+					<Height>260</Height>
 					<Rotation>0.0</Rotation>
 				</RectangleNode>
 				<RectangleNode>
@@ -1334,7 +1356,7 @@ return fillLevel;]]></Body>
 					<AttractorsLayout>random</AttractorsLayout>
 
 					<Width>50</Width>
-					<Height>220</Height>
+					<Height>260</Height>
 					<Rotation>0.0</Rotation>
 				</RectangleNode>
 				<RectangleNode>
