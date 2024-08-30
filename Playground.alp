@@ -68,7 +68,8 @@
 			<StartupCode><![CDATA[initLines();
 initCrossLines();
 initSourceUpstream();
-initSinkDownstream();]]></StartupCode>
+initSinkDownstream();
+hideMarkupElementsOnMain();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724158279003</Id>
@@ -618,6 +619,27 @@ return fillLevel;]]></Body>
 int nBlocks = nLines * 8;
 double fillLevel = (double) this.nOccupiedBlocksTotal / nBlocks;
 return fillLevel;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725007678431</Id>
+					<Name><![CDATA[hideMarkupElementsOnMain]]></Name>
+					<X>-120</X><Y>910</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[ArrayList<RectangularNode> allMarkupCollections = new ArrayList<>();
+allMarkupCollections.addAll(this.collectionCrossLineMarkup);
+allMarkupCollections.addAll(this.collectionLineMarkups);
+
+for (RectangularNode r : allMarkupCollections) {
+	r.setVisible(false);
+}
+
+this.markupSourceUpstream.setVisible(false);
+this.markupSinkDownstream.setVisible(false);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
