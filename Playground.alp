@@ -269,6 +269,90 @@ hideMarkupElementsOnMain();]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725123138679</Id>
+					<Name><![CDATA[emergencyStopMax]]></Name>
+					<X>-300</X><Y>550</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1725123138677</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725123146635</Id>
+					<Name><![CDATA[resumeAfterMax]]></Name>
+					<X>-300</X><Y>580</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1725123146633</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725123150300</Id>
+					<Name><![CDATA[emergencyStopMin]]></Name>
+					<X>-300</X><Y>610</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1725123150298</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725123153165</Id>
+					<Name><![CDATA[resumeAfterMin]]></Name>
+					<X>-300</X><Y>640</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1725123153163</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1724174760455</Id>
 					<Name><![CDATA[collectionLineMarkups]]></Name>
@@ -7215,7 +7299,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724680704547</Id>
 					<Name><![CDATA[vehicle]]></Name>
-					<X>580</X><Y>290</Y>
+					<X>740</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7227,7 +7311,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724680707753</Id>
 					<Name><![CDATA[leavingVehicle]]></Name>
-					<X>580</X><Y>320</Y>
+					<X>740</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7239,7 +7323,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724683741795</Id>
 					<Name><![CDATA[isOperational]]></Name>
-					<X>580</X><Y>260</Y>
+					<X>740</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7251,10 +7335,22 @@ this.network.setVisible(false);]]></StartupCode>
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725126077749</Id>
+					<Name><![CDATA[isCorrectingFillLevel]]></Name>
+					<X>550</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1724682973822</Id>
 					<Name><![CDATA[MTTR]]></Name>
-					<X>580</X><Y>190</Y>
+					<X>740</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7278,7 +7374,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1724682984521</Id>
 					<Name><![CDATA[MTBF]]></Name>
-					<X>580</X><Y>160</Y>
+					<X>740</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7302,7 +7398,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1724683137254</Id>
 					<Name><![CDATA[TAKTTIME]]></Name>
-					<X>580</X><Y>130</Y>
+					<X>740</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7326,7 +7422,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1724789357080</Id>
 					<Name><![CDATA[selectedColorVehicleDistribution]]></Name>
-					<X>580</X><Y>220</Y>
+					<X>740</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7399,7 +7495,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725117893916</Id>
 					<Name><![CDATA[colorVehicleRNG]]></Name>
-					<X>580</X><Y>500</Y>
+					<X>740</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7460,7 +7556,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724680554381</Id>
 					<Name><![CDATA[ExitingIdle]]></Name>
-					<X>330</X><Y>170</Y>
+					<X>490</X><Y>170</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7472,7 +7568,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724680576083</Id>
 					<Name><![CDATA[VehicleExiting]]></Name>
-					<X>330</X><Y>270</Y>
+					<X>490</X><Y>270</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7485,7 +7581,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724680602627</Id>
 					<Name><![CDATA[VehicleExited]]></Name>
-					<X>330</X><Y>370</Y>
+					<X>490</X><Y>370</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7498,7 +7594,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724682458705</Id>
 					<Name><![CDATA[Operational]]></Name>
-					<X>30</X><Y>170</Y>
+					<X>190</X><Y>170</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7511,7 +7607,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="Operational" ParentStateId="1724682458705">
 					<Id>1724682475957</Id>
 					<Name><![CDATA[Idle]]></Name>
-					<X>50</X><Y>230</Y>
+					<X>210</X><Y>230</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7523,7 +7619,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="Operational" ParentStateId="1724682458705">
 					<Id>1724682539163</Id>
 					<Name><![CDATA[Creating]]></Name>
-					<X>50</X><Y>330</Y>
+					<X>210</X><Y>330</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7536,7 +7632,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724682737918</Id>
 					<Name><![CDATA[NotOperational]]></Name>
-					<X>30</X><Y>480</Y>
+					<X>190</X><Y>480</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7548,10 +7644,24 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 						<FillColor>-65536</FillColor>
 					</Properties>
 				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1725121702810</Id>
+					<Name><![CDATA[CorrectingFillLevel]]></Name>
+					<X>10</X><Y>280</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="130" Height="30">
+						<EntryAction><![CDATA[this.isCorrectingFillLevel = true;]]></EntryAction>
+						<ExitAction><![CDATA[this.isCorrectingFillLevel = false;]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1724680512860</Id>
 					<Name><![CDATA[statechartExiting]]></Name>
-					<X>400</X><Y>130</Y>
+					<X>560</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7566,7 +7676,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724680627865</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>400</X><Y>200</Y>
+					<X>560</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7596,7 +7706,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724680637854</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>400</X><Y>300</Y>
+					<X>560</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7626,7 +7736,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724680646431</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>470</X><Y>390</Y>
+					<X>630</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7658,7 +7768,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1724681974246</Id>
 					<Name><![CDATA[sourceUpstreamOperation]]></Name>
-					<X>100</X><Y>130</Y>
+					<X>260</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7673,7 +7783,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="InitialStatePointer" ParentState="Operational" ParentStateId="1724682458705">
 					<Id>1724682479892</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>100</X><Y>200</Y>
+					<X>260</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7688,7 +7798,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="Operational" ParentStateId="1724682458705">
 					<Id>1724682582347</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>70</X><Y>260</Y>
+					<X>230</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7718,7 +7828,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="Operational" ParentStateId="1724682458705">
 					<Id>1724682592921</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>120</X><Y>330</Y>
+					<X>280</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7748,7 +7858,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724682602651</Id>
 					<Name><![CDATA[Failure]]></Name>
-					<X>60</X><Y>390</Y>
+					<X>220</X><Y>390</Y>
 					<Label><X>-50</X><Y>20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7778,7 +7888,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724682623334</Id>
 					<Name><![CDATA[Repair]]></Name>
-					<X>140</X><Y>480</Y>
+					<X>300</X><Y>480</Y>
 					<Label><X>10</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7805,12 +7915,104 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1725121739271</Id>
+					<Name><![CDATA[transition5]]></Name>
+					<X>190</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-130</X><Y>0</Y></Point>
+						<Point><X>-130</X><Y>50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1724682458705" Target="1725121702810" Trigger="condition">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[main.getFillLevelTotal() > main.emergencyStopMax]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1725121752959</Id>
+					<Name><![CDATA[transition6]]></Name>
+					<X>60</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
+						<Point><X>130</X><Y>50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1725121702810" Target="1724682458705" Trigger="condition">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[main.getFillLevelTotal() <= main.resumeAfterMax]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="CorrectingFillLevel" ParentStateId="1725121702810">
+					<Id>1725122474056</Id>
+					<Name><![CDATA[transition7]]></Name>
+					<X>140</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-42</X><Y>20</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1725121702810" Target="1725121702810" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[0.5]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
 			</StatechartElements>
 			<DynamicEvents>
 				<DynamicEventClass>
 					<Id>1725106160301</Id>
 					<Name><![CDATA[FailureEvent]]></Name>
-					<X>190</X><Y>380</Y>
+					<X>350</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7820,7 +8022,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<DynamicEventClass>
 					<Id>1725106160317</Id>
 					<Name><![CDATA[RepairEvent]]></Name>
-					<X>190</X><Y>500</Y>
+					<X>350</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7834,7 +8036,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724679296553</Id>
 					<Name><![CDATA[createNewVehicle]]></Name>
-					<X>580</X><Y>360</Y>
+					<X>740</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7863,7 +8065,7 @@ this.statechartExiting.receiveMessage(this.leavingVehicle);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724680352098</Id>
 					<Name><![CDATA[moveToCrossLine]]></Name>
-					<X>580</X><Y>390</Y>
+					<X>740</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7877,7 +8079,7 @@ this.leavingVehicle = null;]]></Body>
 				<CustomDistribution>
 					<Id>1724757336449</Id>
 					<Name><![CDATA[colorVehicleCustomDistribution]]></Name>
-					<X>580</X><Y>430</Y>
+					<X>740</X><Y>430</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7966,7 +8168,7 @@ this.leavingVehicle = null;]]></Body>
 				<CustomDistribution>
 					<Id>1724759826709</Id>
 					<Name><![CDATA[colorVehicleUniformDistribution]]></Name>
-					<X>580</X><Y>460</Y>
+					<X>740</X><Y>460</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8439,7 +8641,7 @@ this.leavingVehicle = null;]]></Body>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-1</FillColor>
-					<FillColorCode><![CDATA[this.isOperational ? yellowGreen : red]]></FillColorCode>
+					<FillColorCode><![CDATA[this.isCorrectingFillLevel ? gold : (this.isOperational ? yellowGreen : red)]]></FillColorCode>
 					<FillMaterial>null</FillMaterial>
 				</Oval>
 				<Network>
@@ -9418,7 +9620,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724794827100</Id>
 					<Name><![CDATA[isOperational]]></Name>
-					<X>670</X><Y>250</Y>
+					<X>830</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9430,7 +9632,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724794838435</Id>
 					<Name><![CDATA[isWaitingForMinFillLevel]]></Name>
-					<X>670</X><Y>220</Y>
+					<X>830</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9442,7 +9644,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="PlainVariable">
 					<Id>1724846166808</Id>
 					<Name><![CDATA[vehicle]]></Name>
-					<X>670</X><Y>280</Y>
+					<X>830</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9451,10 +9653,22 @@ this.network.setVisible(false);]]></StartupCode>
 						<Type><![CDATA[Vehicle]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725125836979</Id>
+					<Name><![CDATA[isCorrectingFillLevel]]></Name>
+					<X>830</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1724793838233</Id>
 					<Name><![CDATA[TAKTTIME]]></Name>
-					<X>670</X><Y>120</Y>
+					<X>830</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9478,7 +9692,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1724793853290</Id>
 					<Name><![CDATA[MTBF]]></Name>
-					<X>670</X><Y>150</Y>
+					<X>830</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9502,7 +9716,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1724793860723</Id>
 					<Name><![CDATA[MTTR]]></Name>
-					<X>670</X><Y>180</Y>
+					<X>830</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9644,7 +9858,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724794093500</Id>
 					<Name><![CDATA[WaitingForMinFillLevel]]></Name>
-					<X>30</X><Y>170</Y>
+					<X>190</X><Y>170</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9658,7 +9872,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724794118389</Id>
 					<Name><![CDATA[Operational]]></Name>
-					<X>30</X><Y>270</Y>
+					<X>190</X><Y>270</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9672,7 +9886,7 @@ create_FailureEvent(exponential(1.0/this.MTBF, 0, this.failureEventRNG));]]></En
 				<StatechartElement Class="State" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794155872</Id>
 					<Name><![CDATA[Idle]]></Name>
-					<X>50</X><Y>330</Y>
+					<X>210</X><Y>330</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9684,7 +9898,7 @@ create_FailureEvent(exponential(1.0/this.MTBF, 0, this.failureEventRNG));]]></En
 				<StatechartElement Class="State" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794159944</Id>
 					<Name><![CDATA[Processing]]></Name>
-					<X>50</X><Y>420</Y>
+					<X>210</X><Y>420</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9698,7 +9912,7 @@ this.statechartProcessing.receiveMessage(msg);]]></EntryAction>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724794202784</Id>
 					<Name><![CDATA[NotOperational]]></Name>
-					<X>30</X><Y>530</Y>
+					<X>190</X><Y>530</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9712,7 +9926,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724795319644</Id>
 					<Name><![CDATA[ProcessingIdle]]></Name>
-					<X>330</X><Y>170</Y>
+					<X>490</X><Y>170</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9724,7 +9938,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724795404310</Id>
 					<Name><![CDATA[VehicleEntering]]></Name>
-					<X>330</X><Y>470</Y>
+					<X>490</X><Y>470</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9737,7 +9951,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724795427990</Id>
 					<Name><![CDATA[RequestingNextVehicle]]></Name>
-					<X>330</X><Y>370</Y>
+					<X>490</X><Y>370</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9750,7 +9964,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724843640044</Id>
 					<Name><![CDATA[VehicleEntered]]></Name>
-					<X>330</X><Y>570</Y>
+					<X>490</X><Y>570</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9763,7 +9977,7 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1724845560869</Id>
 					<Name><![CDATA[InitiatingVehicleEnter]]></Name>
-					<X>330</X><Y>270</Y>
+					<X>490</X><Y>270</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9774,10 +9988,24 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1725122228854</Id>
+					<Name><![CDATA[CorrectingFillLevel]]></Name>
+					<X>10</X><Y>370</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="150" Height="30">
+						<EntryAction><![CDATA[this.isCorrectingFillLevel = true;]]></EntryAction>
+						<ExitAction><![CDATA[this.isCorrectingFillLevel = false;]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1724794065914</Id>
 					<Name><![CDATA[sinkDownstreamOperation]]></Name>
-					<X>100</X><Y>130</Y>
+					<X>260</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9792,7 +10020,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="InitialStatePointer" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794174555</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>100</X><Y>300</Y>
+					<X>260</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9807,7 +10035,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724794262089</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>100</X><Y>200</Y>
+					<X>260</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9838,7 +10066,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794270048</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>70</X><Y>360</Y>
+					<X>230</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9868,7 +10096,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="Operational" ParentStateId="1724794118389">
 					<Id>1724794276284</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>130</X><Y>420</Y>
+					<X>290</X><Y>420</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9898,7 +10126,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724794290176</Id>
 					<Name><![CDATA[Failure]]></Name>
-					<X>60</X><Y>480</Y>
+					<X>220</X><Y>480</Y>
 					<Label><X>-50</X><Y>20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9928,7 +10156,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724794305421</Id>
 					<Name><![CDATA[Repair]]></Name>
-					<X>140</X><Y>530</Y>
+					<X>300</X><Y>530</Y>
 					<Label><X>10</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9958,7 +10186,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1724795321973</Id>
 					<Name><![CDATA[statechartProcessing]]></Name>
-					<X>400</X><Y>130</Y>
+					<X>560</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9973,7 +10201,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724795462770</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>400</X><Y>200</Y>
+					<X>560</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10003,7 +10231,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724795474868</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>400</X><Y>500</Y>
+					<X>560</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10033,7 +10261,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724795491532</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>470</X><Y>590</Y>
+					<X>630</X><Y>590</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10065,7 +10293,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="WaitingForMinFillLevel" ParentStateId="1724794093500">
 					<Id>1724839477421</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>170</X><Y>190</Y>
+					<X>330</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10095,7 +10323,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1724845624168</Id>
 					<Name><![CDATA[transition8]]></Name>
-					<X>400</X><Y>300</Y>
+					<X>560</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10125,7 +10353,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1725011174894</Id>
 					<Name><![CDATA[transition7]]></Name>
-					<X>400</X><Y>400</Y>
+					<X>560</X><Y>400</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10152,12 +10380,104 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1725122241472</Id>
+					<Name><![CDATA[transition9]]></Name>
+					<X>190</X><Y>330</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-110</X><Y>0</Y></Point>
+						<Point><X>-110</X><Y>40</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1724794118389" Target="1725122228854" Trigger="condition">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[main.getFillLevelTotal() < main.emergencyStopMin]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1725122258239</Id>
+					<Name><![CDATA[transition10]]></Name>
+					<X>80</X><Y>400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
+						<Point><X>110</X><Y>50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1725122228854" Target="1724794118389" Trigger="condition">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[main.getFillLevelTotal() >= main.resumeAfterMin]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="CorrectingFillLevel" ParentStateId="1725122228854">
+					<Id>1725122444301</Id>
+					<Name><![CDATA[transition11]]></Name>
+					<X>160</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-40</X><Y>20</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1725122228854" Target="1725122228854" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[0.5]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
 			</StatechartElements>
 			<DynamicEvents>
 				<DynamicEventClass>
 					<Id>1725105745814</Id>
 					<Name><![CDATA[FailureEvent]]></Name>
-					<X>190</X><Y>470</Y>
+					<X>350</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10167,7 +10487,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 				<DynamicEventClass>
 					<Id>1725105749066</Id>
 					<Name><![CDATA[RepairEvent]]></Name>
-					<X>190</X><Y>550</Y>
+					<X>350</X><Y>550</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10181,7 +10501,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724794756509</Id>
 					<Name><![CDATA[storeVehicleFromCrossLine]]></Name>
-					<X>670</X><Y>320</Y>
+					<X>830</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10200,7 +10520,7 @@ this.statechartProcessing.receiveMessage(msg);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724794777878</Id>
 					<Name><![CDATA[requestNewVehicle]]></Name>
-					<X>670</X><Y>350</Y>
+					<X>830</X><Y>380</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -10720,7 +11040,7 @@ this.vehicle = null;]]></Code>
 					<RadiusY>40</RadiusY>
 					<Rotation>0.0</Rotation>
 					<FillColor>-1</FillColor>
-					<FillColorCode><![CDATA[this.isWaitingForMinFillLevel ? gold : (this.isOperational ? yellowGreen : red)]]></FillColorCode>
+					<FillColorCode><![CDATA[this.isWaitingForMinFillLevel || this.isCorrectingFillLevel ? gold : (this.isOperational ? yellowGreen : red)]]></FillColorCode>
 					<FillMaterial>null</FillMaterial>
 				</Oval>
 				<Network>
@@ -12450,6 +12770,66 @@ insertInto(db_custom_stats)
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725124076905</Id>
+					<Name><![CDATA[configEmergencyStopMax]]></Name>
+					<X>170</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0.9]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725124134944</Id>
+					<Name><![CDATA[configResumeAfterMax]]></Name>
+					<X>170</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0.8]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725124137172</Id>
+					<Name><![CDATA[configEmergencyStopMin]]></Name>
+					<X>170</X><Y>460</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0.1]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725124139337</Id>
+					<Name><![CDATA[configResumeAfterMin]]></Name>
+					<X>170</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0.2]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 			</Variables>
 
 			<Shapes>
@@ -12676,6 +13056,370 @@ insertInto(db_custom_stats)
 					</Font>
 					<Alignment>CENTER</Alignment>
 				</Text>
+				<Text>
+					<Id>1725123994543</Id>
+					<Name><![CDATA[labelEmergencyStopMax]]></Name>
+					<X>350</X><Y>260</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Emergency Stop Max:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725124145411</Id>
+					<Name><![CDATA[labelResumeAfterMax]]></Name>
+					<X>350</X><Y>340</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Resume After Max:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725124158232</Id>
+					<Name><![CDATA[labelEmergencyStopMin]]></Name>
+					<X>350</X><Y>430</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Emergency Stop Min:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725124166502</Id>
+					<Name><![CDATA[labelResumeAfterMin]]></Name>
+					<X>350</X><Y>510</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Resume After Min:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125533677</Id>
+					<Name><![CDATA[text5]]></Name>
+					<X>350</X><Y>310</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[min]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMax.getMin()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125533696</Id>
+					<Name><![CDATA[text6]]></Name>
+					<X>490</X><Y>310</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[max]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMax.getMax()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>RIGHT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125533700</Id>
+					<Name><![CDATA[text7]]></Name>
+					<X>420</X><Y>310</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[value]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMax.getValue()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125537239</Id>
+					<Name><![CDATA[text8]]></Name>
+					<X>350</X><Y>400</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[min]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMax.getMin()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125537244</Id>
+					<Name><![CDATA[text9]]></Name>
+					<X>490</X><Y>400</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[max]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMax.getMax()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>RIGHT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125537245</Id>
+					<Name><![CDATA[text10]]></Name>
+					<X>420</X><Y>400</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[value]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMax.getValue()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125541142</Id>
+					<Name><![CDATA[text11]]></Name>
+					<X>350</X><Y>480</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[min]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMin.getMin()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125541146</Id>
+					<Name><![CDATA[text12]]></Name>
+					<X>490</X><Y>480</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[max]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMin.getMax()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>RIGHT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125541148</Id>
+					<Name><![CDATA[text13]]></Name>
+					<X>420</X><Y>480</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[value]]></Text>
+					<TextCode><![CDATA[sliderEmergencyStopMin.getValue()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125546254</Id>
+					<Name><![CDATA[text14]]></Name>
+					<X>350</X><Y>560</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[min]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMin.getMin()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125546259</Id>
+					<Name><![CDATA[text15]]></Name>
+					<X>490</X><Y>560</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[max]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMin.getMax()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>RIGHT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725125546260</Id>
+					<Name><![CDATA[text16]]></Name>
+					<X>420</X><Y>560</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[value]]></Text>
+					<TextCode><![CDATA[sliderResumeAfterMin.getValue()]]></TextCode>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
 			</Shapes>
 			<Controls>
 				<Control Type="Button">
@@ -12863,6 +13607,102 @@ this.configNumberOfLines = value + 5;
 						<LabelText><![CDATA[Clear DB]]></LabelText>
 					</ExtendedProperties>
 				</Control>
+				<Control Type="Slider">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725123953266</Id>
+					<Name><![CDATA[sliderEmergencyStopMax]]></Name>
+					<X>350</X><Y>280</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="140" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<DefaultValueCode><![CDATA[0.9]]></DefaultValueCode>
+						<Orientation>HORIZONTAL</Orientation>
+						<MinValue><![CDATA[0]]></MinValue>
+						<MaxValue><![CDATA[1]]></MaxValue>
+						<LinkTo>true</LinkTo>
+						<Link>configEmergencyStopMax</Link>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Slider">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725124221537</Id>
+					<Name><![CDATA[sliderResumeAfterMax]]></Name>
+					<X>350</X><Y>370</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="140" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
+						<Orientation>HORIZONTAL</Orientation>
+						<MinValue><![CDATA[0]]></MinValue>
+						<MaxValue><![CDATA[1]]></MaxValue>
+						<LinkTo>true</LinkTo>
+						<Link>configResumeAfterMax</Link>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Slider">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725124224959</Id>
+					<Name><![CDATA[sliderEmergencyStopMin]]></Name>
+					<X>350</X><Y>450</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="140" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
+						<Orientation>HORIZONTAL</Orientation>
+						<MinValue><![CDATA[0]]></MinValue>
+						<MaxValue><![CDATA[1]]></MaxValue>
+						<LinkTo>true</LinkTo>
+						<Link>configEmergencyStopMin</Link>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Slider">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725124227854</Id>
+					<Name><![CDATA[sliderResumeAfterMin]]></Name>
+					<X>350</X><Y>530</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="140" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
+						<Orientation>HORIZONTAL</Orientation>
+						<MinValue><![CDATA[0]]></MinValue>
+						<MaxValue><![CDATA[1]]></MaxValue>
+						<LinkTo>true</LinkTo>
+						<Link>configResumeAfterMin</Link>
+					</ExtendedProperties>
+				</Control>
 			</Controls>
 
 			<Parameters>			
@@ -12894,6 +13734,30 @@ this.configNumberOfLines = value + 5;
 					<ParameterName><![CDATA[minFillLevel]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[this.configMinFillLevel]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[emergencyStopMax]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configEmergencyStopMax]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[resumeAfterMax]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configResumeAfterMax]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[emergencyStopMin]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configEmergencyStopMin]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[resumeAfterMin]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configResumeAfterMin]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>			
