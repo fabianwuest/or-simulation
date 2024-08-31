@@ -839,6 +839,12 @@ this.markupSinkDownstream.setVisible(false);]]></Body>
 						<Parameter>
 							<Name><![CDATA[selectedColorVehicleDistribution]]></Name>
 						</Parameter>
+						<Parameter>
+							<Name><![CDATA[failureEventRNG]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[repairEventRNG]]></Name>
+						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
 					<Replication Class="CodeValue">
@@ -981,6 +987,12 @@ this.markupSinkDownstream.setVisible(false);]]></Body>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[MTTR]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[failureEventRNG]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[repairEventRNG]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -7332,6 +7344,55 @@ this.network.setVisible(false);]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725111826638</Id>
+					<Name><![CDATA[failureEventRNG]]></Name>
+					<X>20</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Random]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[new Random(1)]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1725111826636</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725111829976</Id>
+					<Name><![CDATA[repairEventRNG]]></Name>
+					<X>140</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Random]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<UnitOfValue Class="TimeUnits"><![CDATA[SECOND]]></UnitOfValue>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[new Random(2)]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1725111829974</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Connectors>
 				<Connector>
@@ -7416,6 +7477,7 @@ this.network.setVisible(false);]]></StartupCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="220">
+						<EntryAction><![CDATA[create_FailureEvent(exponential(1.0/this.MTBF, 0, this.failureEventRNG));]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -7453,7 +7515,8 @@ this.network.setVisible(false);]]></StartupCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
-						<EntryAction><![CDATA[this.isOperational = false;]]></EntryAction>
+						<EntryAction><![CDATA[this.isOperational = false;
+create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></EntryAction>
 						<ExitAction><![CDATA[this.isOperational = true;]]></ExitAction>
 						<FillColor>-65536</FillColor>
 					</Properties>
@@ -7668,7 +7731,7 @@ this.network.setVisible(false);]]></StartupCode>
 						<Point><X>0</X><Y>90</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724682458705" Target="1724682737918" Trigger="rate">
+					<Properties Source="1724682458705" Target="1724682737918" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -7678,10 +7741,10 @@ this.network.setVisible(false);]]></StartupCode>
 							<Code><![CDATA[1.0/this.MTBF]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["FailureEvent"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -7698,7 +7761,7 @@ this.network.setVisible(false);]]></StartupCode>
 						<Point><X>-1</X><Y>-90</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724682737918" Target="1724682458705" Trigger="rate">
+					<Properties Source="1724682737918" Target="1724682458705" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -7708,14 +7771,36 @@ this.network.setVisible(false);]]></StartupCode>
 							<Code><![CDATA[1.0/this.MTTR]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["RepairEvent"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
 			</StatechartElements>
+			<DynamicEvents>
+				<DynamicEventClass>
+					<Id>1725106160301</Id>
+					<Name><![CDATA[FailureEvent]]></Name>
+					<X>190</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Action><![CDATA[this.sourceUpstreamOperation.receiveMessage("FailureEvent");]]></Action>
+				</DynamicEventClass>
+				<DynamicEventClass>
+					<Id>1725106160317</Id>
+					<Name><![CDATA[RepairEvent]]></Name>
+					<X>190</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Action><![CDATA[this.sourceUpstreamOperation.receiveMessage("RepairEvent");]]></Action>
+				</DynamicEventClass>
+			</DynamicEvents>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -9411,6 +9496,54 @@ this.network.setVisible(false);]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725111696646</Id>
+					<Name><![CDATA[failureEventRNG]]></Name>
+					<X>20</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Random]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[new Random(3)]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1725111696644</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725111709839</Id>
+					<Name><![CDATA[repairEventRNG]]></Name>
+					<X>140</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Random]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[new Random(4)]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1725111709837</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Connectors>
 				<Connector>
@@ -9504,7 +9637,8 @@ this.network.setVisible(false);]]></StartupCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="210">
-						<EntryAction><![CDATA[this.isOperational = true;]]></EntryAction>
+						<EntryAction><![CDATA[this.isOperational = true;
+create_FailureEvent(exponential(1.0/this.MTBF, 0, this.failureEventRNG));]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -9543,7 +9677,8 @@ this.statechartProcessing.receiveMessage(msg);]]></EntryAction>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="140" Height="30">
-						<EntryAction><![CDATA[this.isOperational = false;]]></EntryAction>
+						<EntryAction><![CDATA[this.isOperational = false;
+create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></EntryAction>
 						<FillColor>-65536</FillColor>
 					</Properties>
 				</StatechartElement>
@@ -9746,7 +9881,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 						<Point><X>0</X><Y>50</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724794118389" Target="1724794202784" Trigger="rate">
+					<Properties Source="1724794118389" Target="1724794202784" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -9756,10 +9891,10 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 							<Code><![CDATA[1.0/this.MTBF]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["FailureEvent"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -9776,7 +9911,7 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 						<Point><X>0</X><Y>-50</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
-					<Properties Source="1724794202784" Target="1724794118389" Trigger="rate">
+					<Properties Source="1724794202784" Target="1724794118389" Trigger="message">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
@@ -9786,10 +9921,10 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 							<Code><![CDATA[1.0/this.MTTR]]></Code>
 							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
 						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
+						<MessageType><![CDATA[String]]></MessageType>
 						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA["RepairEvent"]]></EqualsExpression>
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
@@ -9991,6 +10126,28 @@ downstreamCrossLine.exitingVehicleToDownstream();]]></EntryAction>
 					</Properties>	
 				</StatechartElement>
 			</StatechartElements>
+			<DynamicEvents>
+				<DynamicEventClass>
+					<Id>1725105745814</Id>
+					<Name><![CDATA[FailureEvent]]></Name>
+					<X>190</X><Y>470</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Action><![CDATA[this.sinkDownstreamOperation.receiveMessage("FailureEvent");]]></Action>
+				</DynamicEventClass>
+				<DynamicEventClass>
+					<Id>1725105749066</Id>
+					<Name><![CDATA[RepairEvent]]></Name>
+					<X>190</X><Y>550</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Action><![CDATA[this.sinkDownstreamOperation.receiveMessage("RepairEvent");]]></Action>
+				</DynamicEventClass>
+			</DynamicEvents>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -12143,7 +12300,7 @@ insertInto(db_custom_stats)
 		<ImportSettings>
 		</ImportSettings>
 		<ExportSettings>
-			<ExportExcelFilePath><![CDATA[Data/data.xlsx]]></ExportExcelFilePath>
+			<ExportExcelFilePath><![CDATA[data.xlsx]]></ExportExcelFilePath>
 			<TableReference>
 				<PackageName><![CDATA[playground]]></PackageName>
 				<ClassName><![CDATA[db_custom_stats]]></ClassName>
@@ -12655,6 +12812,28 @@ this.configNumberOfLines = value + 5;
 						<MaxValue><![CDATA[1]]></MaxValue>
 						<LinkTo>true</LinkTo>
 						<Link>configMinFillLevel</Link>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725110594340</Id>
+					<Name><![CDATA[buttonDBCustomStats]]></Name>
+					<X>10</X><Y>620</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="100" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[deleteFrom(db_custom_stats).execute();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Clear DB]]></LabelText>
 					</ExtendedProperties>
 				</Control>
 			</Controls>
