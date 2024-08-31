@@ -12006,6 +12006,15 @@ return null;]]></Body>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
 			<StartupCode><![CDATA[this.initBlockSizePerColor();]]></StartupCode>
+			<DestroyCode><![CDATA[System.out.println("N: " + this.histogramDataBlockSize.count());
+System.out.println("Mean: " + this.histogramDataBlockSize.mean());
+System.out.println("Std. Dev.: " + this.histogramDataBlockSize.deviation());
+System.out.println("Mean Confidence: " + this.histogramDataBlockSize.meanConfidence());
+System.out.println();
+System.out.println(this.histogramDataBlockSize.count());
+System.out.println(this.histogramDataBlockSize.mean());
+System.out.println(this.histogramDataBlockSize.deviation());
+System.out.println(this.histogramDataBlockSize.meanConfidence());]]></DestroyCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724861265080</Id>
