@@ -69,7 +69,9 @@
 initCrossLines();
 initSourceUpstream();
 initSinkDownstream();
-hideMarkupElementsOnMain();]]></StartupCode>
+hideMarkupElementsOnMain();
+buildSeedSets();
+createAndSetRNGs();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1724158279003</Id>
@@ -162,6 +164,22 @@ hideMarkupElementsOnMain();]]></StartupCode>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725130983488</Id>
+					<Name><![CDATA[seedSets]]></Name>
+					<Description><![CDATA[Probabilistic processes pick a seed based on the seedSetIdx that is selected.]]></Description>
+					<X>-300</X><Y>680</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[ArrayList<LinkedHashMap<String, Integer>>]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new ArrayList<LinkedHashMap<String, Integer>>();]]></Code>
+						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="Parameter">
@@ -346,6 +364,27 @@ hideMarkupElementsOnMain();]]></StartupCode>
 						<SdArray>false</SdArray>
 						<ParameterEditor>
 							<Id>1725123153163</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725130757461</Id>
+					<Name><![CDATA[seedSetIdx]]></Name>
+					<X>-300</X><Y>520</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1725130757459</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -724,6 +763,51 @@ for (RectangularNode r : allMarkupCollections) {
 
 this.markupSourceUpstream.setVisible(false);
 this.markupSinkDownstream.setVisible(false);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725130920601</Id>
+					<Name><![CDATA[buildSeedSets]]></Name>
+					<X>-300</X><Y>720</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[for (int i=0; i<20; i++) {
+	LinkedHashMap<String, Integer> seeds = new LinkedHashMap<>();
+	seeds.put("sourceFailure", i);
+	seeds.put("sourceRepair", i+1);
+	seeds.put("sinkFailure", i+2);
+	seeds.put("sinkRepair", i+3);
+	seeds.put("color", i+4);
+	this.seedSets.add(seeds);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725133221136</Id>
+					<Name><![CDATA[createAndSetRNGs]]></Name>
+					<X>-300</X><Y>750</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Select seeds.
+int sourceFailure = seedSets.get(seedSetIdx).get("sourceFailure");
+int sourceRepair = seedSets.get(seedSetIdx).get("sourceRepair");
+int color = seedSets.get(seedSetIdx).get("color");
+int sinkFailure = seedSets.get(seedSetIdx).get("sinkFailure");
+int sinkRepair = seedSets.get(seedSetIdx).get("sinkRepair");
+
+// Create RNGs.
+sourceUpstream.set_failureEventRNG(new Random(sourceFailure));
+sourceUpstream.set_repairEventRNG(new Random(sourceRepair));
+sourceUpstream.set_colorVehicleRNG(new Random(color));
+sinkDownstream.set_failureEventRNG(new Random(sinkFailure));
+sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -7446,6 +7530,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725111826638</Id>
 					<Name><![CDATA[failureEventRNG]]></Name>
+					<Description><![CDATA[Set in main.]]></Description>
 					<X>20</X><Y>620</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -7456,7 +7541,7 @@ this.network.setVisible(false);]]></StartupCode>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[new Random(1)]]></Code>
+							<Code><![CDATA[new Random(1000) // Reset with seed in main.]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1725111826636</Id>
@@ -7470,6 +7555,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725111829976</Id>
 					<Name><![CDATA[repairEventRNG]]></Name>
+					<Description><![CDATA[Set in main.]]></Description>
 					<X>140</X><Y>620</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -7480,9 +7566,6 @@ this.network.setVisible(false);]]></StartupCode>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<UnitOfValue Class="TimeUnits"><![CDATA[SECOND]]></UnitOfValue>
 						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[new Random(2)]]></Code>
-						</DefaultValue>
 						<ParameterEditor>
 							<Id>1725111829974</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
@@ -7495,6 +7578,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725117893916</Id>
 					<Name><![CDATA[colorVehicleRNG]]></Name>
+					<Description><![CDATA[Set in main.]]></Description>
 					<X>740</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -7504,9 +7588,6 @@ this.network.setVisible(false);]]></StartupCode>
 						<Type><![CDATA[Random]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[new Random(5)]]></Code>
-						</DefaultValue>
 						<ParameterEditor>
 							<Id>1725117893914</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
@@ -9740,6 +9821,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725111696646</Id>
 					<Name><![CDATA[failureEventRNG]]></Name>
+					<Description><![CDATA[Set in main.]]></Description>
 					<X>20</X><Y>620</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -9749,9 +9831,6 @@ this.network.setVisible(false);]]></StartupCode>
 						<Type><![CDATA[Random]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[new Random(3)]]></Code>
-						</DefaultValue>
 						<ParameterEditor>
 							<Id>1725111696644</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
@@ -9764,6 +9843,7 @@ this.network.setVisible(false);]]></StartupCode>
 				<Variable Class="Parameter">
 					<Id>1725111709839</Id>
 					<Name><![CDATA[repairEventRNG]]></Name>
+					<Description><![CDATA[Set in main.]]></Description>
 					<X>140</X><Y>620</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -9773,9 +9853,6 @@ this.network.setVisible(false);]]></StartupCode>
 						<Type><![CDATA[Random]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[new Random(4)]]></Code>
-						</DefaultValue>
 						<ParameterEditor>
 							<Id>1725111709837</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
@@ -12689,7 +12766,7 @@ insertInto(db_custom_stats)
 			<MaximumMemory>1024</MaximumMemory>
 			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<SeedValue>1</SeedValue>
+			<SeedValue>999</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
 			<VmArgs><![CDATA[]]></VmArgs>
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
@@ -12828,6 +12905,18 @@ insertInto(db_custom_stats)
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[0.2]]></Code>
 						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1725130144815</Id>
+					<Name><![CDATA[configSeedSetIdx]]></Name>
+					<X>170</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
 					</Properties>
 				</Variable>
 			</Variables>
@@ -13703,6 +13792,50 @@ this.configNumberOfLines = value + 5;
 						<Link>configResumeAfterMin</Link>
 					</ExtendedProperties>
 				</Control>
+				<Control Type="ComboBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1725129941383</Id>
+					<Name><![CDATA[comboboxSeedSet]]></Name>
+					<X>350</X><Y>170</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="130" Height="20" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[this.configSeedSetIdx = self.getValueIndex();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<Editable>false</Editable>
+						<Button><![CDATA[SeedSet0]]></Button>
+						<Button><![CDATA[SeedSet1]]></Button>
+						<Button><![CDATA[SeedSet2]]></Button>
+						<Button><![CDATA[SeedSet3]]></Button>
+						<Button><![CDATA[SeedSet4]]></Button>
+						<Button><![CDATA[SeedSet5]]></Button>
+						<Button><![CDATA[SeedSet6]]></Button>
+						<Button><![CDATA[SeedSet7]]></Button>
+						<Button><![CDATA[SeedSet8]]></Button>
+						<Button><![CDATA[SeedSet9]]></Button>
+						<Button><![CDATA[SeedSet10]]></Button>
+						<Button><![CDATA[SeedSet11]]></Button>
+						<Button><![CDATA[SeedSet12]]></Button>
+						<Button><![CDATA[SeedSet13]]></Button>
+						<Button><![CDATA[SeedSet14]]></Button>
+						<Button><![CDATA[SeedSet15]]></Button>
+						<Button><![CDATA[SeedSet16]]></Button>
+						<Button><![CDATA[SeedSet17]]></Button>
+						<Button><![CDATA[SeedSet18]]></Button>
+						<Button><![CDATA[SeedSet19]]></Button>
+						<LinkTo>false</LinkTo>
+						<Link>configSeedSetIdx</Link>
+					</ExtendedProperties>
+				</Control>
 			</Controls>
 
 			<Parameters>			
@@ -13758,6 +13891,12 @@ this.configNumberOfLines = value + 5;
 					<ParameterName><![CDATA[resumeAfterMin]]></ParameterName>
 					<ParameterValue Class="CodeValue">
 						<Code><![CDATA[this.configResumeAfterMin]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[seedSetIdx]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.configSeedSetIdx]]></Code>
 					</ParameterValue>
 				</Parameter>
 			</Parameters>			
