@@ -11753,12 +11753,60 @@ this.chartBlockSizePerColor.updateData();
     // Update histogram chart.
     this.histogramDataBlockSize.add(this.currentBlockSize);
     
+    // Update database.
+    this.updateDbCustomStats();
+    
 	this.updateCurrentAverageBlockSize();
 
     // Start a new block
     this.prevColor = _currentColor;
     this.currentBlockSize = 1;
 }]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1725099675134</Id>
+					<Name><![CDATA[updateDbCustomStats]]></Name>
+					<X>20</X><Y>360</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[String mainParameters = "" 
+	+ main.numberOfLines + " | " 
+	+ main.inputStrategy + " | " 
+	+ main.outputStrategy + " | " 
+	+ main.colorVehicleDistribution + " | " 
+	+ main.minFillLevel;
+double modelTimeStamp = time();
+String color = this.prevColor.name();
+int blockSize = this.currentBlockSize;
+double currentMeanBlockSize = this.histogramDataBlockSize.mean();
+double currentMeanConfidenceBlockSize = this.histogramDataBlockSize.meanConfidence();
+double currentDeviationBlockSize = this.histogramDataBlockSize.deviation();
+
+// Insert stats about last block into custom database.
+insertInto(db_custom_stats)
+	.columns(
+		db_custom_stats.main_parameters,
+		db_custom_stats.model_timestamp,
+		db_custom_stats.color,
+		db_custom_stats.block_size,
+		db_custom_stats.current_mean_block_size,
+		db_custom_stats.current_mean_confidence_block_size,
+		db_custom_stats.current_deviation_block_size
+	)
+	.values(
+		mainParameters,
+		modelTimeStamp,
+		color,
+		blockSize,
+		currentMeanBlockSize,
+		currentMeanConfidenceBlockSize,
+		currentDeviationBlockSize
+	)
+	.execute();]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -12009,6 +12057,71 @@ this.chartBlockSizePerColor.updateData();
 						<RelativeWidth>0.8</RelativeWidth>
 					</Bars>
     			</BarChart>
+    			<TimePlot>
+					<Id>1725096061881</Id>
+					<Name><![CDATA[chartAverageBlockSizeOverTime]]></Name>
+					<X>690</X><Y>0</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<AutoUpdate>true</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1725177600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</RecurrenceCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>260</Width>
+					<Height>210</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>180</Width>
+						<Height>120</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>SOUTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<Persistent>true</Persistent>
+					<ShowLegend>true</ShowLegend>
+					<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>		
+					<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+					<VerScaleFromExpression><![CDATA[0]]></VerScaleFromExpression>
+					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
+					<VerScaleType>AUTO</VerScaleType>
+					<DrawLine>true</DrawLine>
+					<Interpolation>LINEAR</Interpolation>
+					<DatasetExpression>  
+						<Title><![CDATA[Mean Block Size Over Time]]></Title>
+					<Expression><![CDATA[my_dataset]]></Expression>
+					<Color>-16777088</Color>
+					<Expression2><![CDATA[this.histogramDataBlockSize.mean()]]></Expression2>
+					<Expression2Flag>true</Expression2Flag>
+						<PointStyle>NONE</PointStyle>
+						<LineWidth>1.0</LineWidth>
+					</DatasetExpression>
+					<SamplesToKeep>5000</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[5000]]></TimeWindowExpression>
+					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+    			</TimePlot>
 			</Charts>
 
 		</ActiveObjectClass>
@@ -12025,12 +12138,56 @@ this.chartBlockSizePerColor.updateData();
 		<Height>600</Height>
 	</Frame>
 	<Database>
-		<Logging>false</Logging>
-		<AutoExport>false</AutoExport>
+		<Logging>true</Logging>
+		<AutoExport>true</AutoExport>
 		<ImportSettings>
 		</ImportSettings>
 		<ExportSettings>
-			<ExportExcelFilePath><![CDATA[]]></ExportExcelFilePath>
+			<ExportExcelFilePath><![CDATA[Data/data.xlsx]]></ExportExcelFilePath>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[agent_parameters_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[datasets_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[agents_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[histograms_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[statistics_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[histograms_raw_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[agent_parameters_raw_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[agents_raw_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[datasets_raw_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[statistics_raw_log]]></ClassName>
+			</TableReference>
+			<TableReference>
+				<PackageName><![CDATA[playground]]></PackageName>
+				<ClassName><![CDATA[db_custom_stats]]></ClassName>
+			</TableReference>
 		</ExportSettings>
 	</Database>
 	
