@@ -845,6 +845,9 @@ this.markupSinkDownstream.setVisible(false);]]></Body>
 						<Parameter>
 							<Name><![CDATA[repairEventRNG]]></Name>
 						</Parameter>
+						<Parameter>
+							<Name><![CDATA[colorVehicleRNG]]></Name>
+						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
 					<Replication Class="CodeValue">
@@ -7393,6 +7396,30 @@ this.network.setVisible(false);]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1725117893916</Id>
+					<Name><![CDATA[colorVehicleRNG]]></Name>
+					<X>580</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[Random]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[new Random(5)]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1725117893914</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Connectors>
 				<Connector>
@@ -7815,10 +7842,10 @@ create_RepairEvent(exponential(1.0/this.MTTR, 0, this.repairEventRNG));]]></Entr
 					<Body><![CDATA[ColorOption selectedColor;
 
 if (this.selectedColorVehicleDistribution == "custom") {
-	selectedColor = this.colorVehicleCustomDistribution();
+	selectedColor = this.colorVehicleCustomDistribution.get(this.colorVehicleRNG);
 } else {
 	// if this.selectedColorVehicleDistribution == "uniform"
-	selectedColor = this.colorVehicleUniformDistribution();
+	selectedColor = this.colorVehicleUniformDistribution.get(this.colorVehicleRNG);
 }
 
 Vehicle vehicle = new Vehicle(selectedColor);
