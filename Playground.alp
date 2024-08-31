@@ -12194,7 +12194,13 @@ System.out.println(this.histogramDataBlockSize.meanConfidence());]]></DestroyCod
 						<Name><![CDATA[vehicle]]></Name>
 						<Type><![CDATA[Vehicle]]></Type>
 					</Parameter>
-					<Body><![CDATA[// Has to be executed first, since it needs the prevColor.
+					<Body><![CDATA[// Do not calculate statistics in the Einschwingphase.
+if (time() < 40000) {
+	return;
+}
+
+
+// Has to be executed first, since it needs the prevColor.
 // this.calculateBlockSizeVariables modifies prevColor.
 this.calculateBlockSizePerColor(vehicle.color, this.prevColor);
 
@@ -12867,7 +12873,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[0.9]]></Code>
+							<Code><![CDATA[0.85]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -12882,7 +12888,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[0.8]]></Code>
+							<Code><![CDATA[0.85]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -12897,7 +12903,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[0.1]]></Code>
+							<Code><![CDATA[0.15]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -12912,7 +12918,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[0.2]]></Code>
+							<Code><![CDATA[0.15]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -13917,7 +13923,7 @@ this.configNumberOfLines = value + 5;
 				<Maximized>false</Maximized>
 				<CloseConfirmation>false</CloseConfirmation>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
-				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
+				<ExecutionMode><![CDATA[virtualTime]]></ExecutionMode>
 				<CpuRatio><![CDATA[ratio_1_2]]></CpuRatio>	        
 				<Title><![CDATA[Playground : Simulation]]></Title>	
 				<FramesPerSecond><![CDATA[20.0]]></FramesPerSecond>
@@ -13940,11 +13946,11 @@ this.configNumberOfLines = value + 5;
 				<UIProperty Name="Toolbar View" Value="false"/>
 			</PresentationProperties>
 			<ModelTimeProperties>
-				<StopOption><![CDATA[Never]]></StopOption>
+				<StopOption><![CDATA[Stop at specified time]]></StopOption>
 				<InitialDate><![CDATA[1724112000000]]></InitialDate>	
 				<InitialTime><![CDATA[0.0]]></InitialTime>	
-				<FinalDate><![CDATA[1726790400000]]></FinalDate>	
-				<FinalTime><![CDATA[100.0]]></FinalTime>	
+				<FinalDate><![CDATA[1724238400000]]></FinalDate>	
+				<FinalTime><![CDATA[126400.0]]></FinalTime>	
 			</ModelTimeProperties>
 		</SimulationExperiment>	
 	</Experiments>
