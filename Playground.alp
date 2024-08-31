@@ -12139,51 +12139,11 @@ insertInto(db_custom_stats)
 	</Frame>
 	<Database>
 		<Logging>true</Logging>
-		<AutoExport>true</AutoExport>
+		<AutoExport>false</AutoExport>
 		<ImportSettings>
 		</ImportSettings>
 		<ExportSettings>
 			<ExportExcelFilePath><![CDATA[Data/data.xlsx]]></ExportExcelFilePath>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[agent_parameters_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[datasets_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[agents_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[histograms_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[statistics_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[histograms_raw_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[agent_parameters_raw_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[agents_raw_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[datasets_raw_log]]></ClassName>
-			</TableReference>
-			<TableReference>
-				<PackageName><![CDATA[playground]]></PackageName>
-				<ClassName><![CDATA[statistics_raw_log]]></ClassName>
-			</TableReference>
 			<TableReference>
 				<PackageName><![CDATA[playground]]></PackageName>
 				<ClassName><![CDATA[db_custom_stats]]></ClassName>
