@@ -631,7 +631,7 @@ this.sinkDownstream.setXY(location.getX(), location.getY()+10);]]></Code>
 					<Id>1724354685404</Id>
 					<Name><![CDATA[createVehiclesForEveryLine]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>20</X><Y>490</Y>
+					<X>-180</X><Y>810</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -667,7 +667,7 @@ this.sinkDownstream.setXY(location.getX(), location.getY()+10);]]></Code>
 					<Id>1724507286323</Id>
 					<Name><![CDATA[createVehiclesForCrossLineUpstream]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>220</X><Y>530</Y>
+					<X>-230</X><Y>840</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -748,7 +748,7 @@ return fillLevel;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1725007678431</Id>
 					<Name><![CDATA[hideMarkupElementsOnMain]]></Name>
-					<X>-120</X><Y>910</Y>
+					<X>820</X><Y>660</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -836,8 +836,8 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<EmbeddedObject>
 					<Id>1724178844083</Id>
 					<Name><![CDATA[lines]]></Name>
-					<X>20</X><Y>550</Y>
-					<Label><X>-15</X><Y>-25</Y></Label>
+					<X>-120</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -905,8 +905,8 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<EmbeddedObject>
 					<Id>1724424270596</Id>
 					<Name><![CDATA[crossLines]]></Name>
-					<X>100</X><Y>550</Y>
-					<Label><X>-35</X><Y>-25</Y></Label>
+					<X>-120</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -1281,7 +1281,7 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<EmbeddedObject>
 					<Id>1724861278728</Id>
 					<Name><![CDATA[statistics]]></Name>
-					<X>-120</X><Y>340</Y>
+					<X>-120</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1775,7 +1775,7 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724943549633</Id>
 					<Name><![CDATA[lastVehicleInLine]]></Name>
-					<X>20</X><Y>340</Y>
+					<X>20</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1787,7 +1787,7 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724943565410</Id>
 					<Name><![CDATA[nVehiclesInLine]]></Name>
-					<X>20</X><Y>370</Y>
+					<X>20</X><Y>300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1799,7 +1799,7 @@ sinkDownstream.set_repairEventRNG(new Random(sinkRepair));]]></Body>
 				<Variable Class="PlainVariable">
 					<Id>1724957204161</Id>
 					<Name><![CDATA[firstVehicleInLine]]></Name>
-					<X>20</X><Y>480</Y>
+					<X>20</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1959,31 +1959,9 @@ this.onVehicleEnterUpdateLineProperties(vehicle);]]></Body>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1724164299148</Id>
-					<Name><![CDATA[removeVehicle]]></Name>
-					<X>20</X><Y>260</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1724164317062</Id>
-					<Name><![CDATA[nextVehicleToUnload]]></Name>
-					<X>20</X><Y>290</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724943607742</Id>
 					<Name><![CDATA[onVehicleLeaveUpdateLineProperties]]></Name>
-					<X>20</X><Y>440</Y>
+					<X>20</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2005,7 +1983,7 @@ this.nVehiclesInLine--;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724943686384</Id>
 					<Name><![CDATA[onVehicleEnterUpdateLineProperties]]></Name>
-					<X>20</X><Y>410</Y>
+					<X>20</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2025,7 +2003,7 @@ this.nVehiclesInLine++;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724957259166</Id>
 					<Name><![CDATA[onVehicleEnterLastBlockUpdate]]></Name>
-					<X>20</X><Y>520</Y>
+					<X>20</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2042,7 +2020,7 @@ this.firstVehicleInLine = enteringVehicle;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1724957286324</Id>
 					<Name><![CDATA[onVehicleLeaveLastBlockUpdate]]></Name>
-					<X>20</X><Y>550</Y>
+					<X>20</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -15082,36 +15060,6 @@ this.configNumberOfLines = value + 5;
 			</ReplicationsProperties>
 		</ParamVariationExperiment>	
 	</Experiments>
-	<JavaClasses>
-		<!--   =========   Java Class   ========  -->
-		<JavaClass>
-			<Id>1724761180594</Id>
-			<Name><![CDATA[Test]]></Name>
-			<Text><![CDATA[/**
- * Test
- */	
-public class Test implements Serializable {
-
-    /**
-     * Default constructor
-     */
-    public Test() {
-    }
-
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * This number is here for model snapshot storing purpose<br>
-	 * It needs to be changed when this class gets changed
-	 */ 
-	private static final long serialVersionUID = 1L;
-
-}]]></Text>
-		</JavaClass>
-	</JavaClasses>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.processmodeling]]></LibraryName>
 		<VersionMajor>8</VersionMajor>
