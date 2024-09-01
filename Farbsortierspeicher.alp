@@ -9301,6 +9301,92 @@ try {
 						<Type><![CDATA[int]]></Type>
 					</Properties>	
 				</ActionChartElement>
+				<ActionChartElement Class="ActionChart">
+					<Id>1725150754161</Id>
+					<Name><![CDATA[inputStrategy3_1]]></Name>
+					<X>2750</X><Y>680</Y>
+					<Label><X>-30</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties AccessType="default" StaticFunction="false" Width="20" Height="20" Next="1725150782771" >
+						<FillColor/>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Code">
+					<Id>1725150812069</Id>
+					<Name><![CDATA[code4]]></Name>
+					<X>2750</X><Y>780</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="580" Height="600" Previous="1725150782771" Next="1725150757349" >
+						<FillColor/>
+						<Code><![CDATA[ArrayList<Line> possibleLines = new ArrayList<>();
+ArrayList<Line> allLines = new ArrayList<>();
+for (Line l : main.lines) {
+	allLines.add(l);
+}
+
+possibleLines = allLines;
+possibleLines.removeIf(line -> line.nVehiclesInLine == 8);
+
+possibleLines = this.getLinesWithLastVehicleSameColor(color, possibleLines);
+
+
+if (!possibleLines.isEmpty()) {
+	possibleLines = this.getShortestLine(possibleLines);
+} else {
+	possibleLines = this.getShortestLine(allLines);
+	ArrayList<Line> realShortestLine = possibleLines;
+	
+	possibleLines = this.getShortestLinesWithoutContainingSameColor(color, possibleLines);
+	
+	if (!possibleLines.isEmpty()) {
+		possibleLines = this.getLinesWithLowestColorProbability(possibleLines);	
+	} else {
+		possibleLines = realShortestLine;
+		possibleLines = this.getLinesWithLowestColorProbability(possibleLines);
+	}
+}
+
+try {
+	targetLineId = possibleLines.get(0).id;
+} catch (IndexOutOfBoundsException e) {
+	throw new IllegalStateException("All lines are occupied.");
+}]]></Code>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1725150757349</Id>
+					<Name><![CDATA[returnStatement4]]></Name>
+					<X>2750</X><Y>1400</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1725150812069" >
+						<FillColor/>
+						<Return><![CDATA[targetLineId]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1725150782771</Id>
+					<Name><![CDATA[targetLineId]]></Name>
+					<X>2750</X><Y>730</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="120" Height="30" Constant="false" Previous="1725150754161" Next="1725150812069" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+					</Properties>	
+				</ActionChartElement>
 			</ActionChartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -9344,7 +9430,8 @@ return targetLineId;]]></Body>
 this.strategiesDispatchTable.put("inputStrategy0", this::inputStrategy0);
 this.strategiesDispatchTable.put("inputStrategy1", this::inputStrategy1);
 this.strategiesDispatchTable.put("inputStrategy1_2", this::inputStrategy1_2);
-this.strategiesDispatchTable.put("inputStrategy2_2", this::inputStrategy2_2);]]></Body>
+this.strategiesDispatchTable.put("inputStrategy2_2", this::inputStrategy2_2);
+this.strategiesDispatchTable.put("inputStrategy3_1", this::inputStrategy3_1);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -9568,6 +9655,61 @@ for (Line l : lines) {
 }
 
 return unrestrictedShortestLines;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[ArrayList<Line>]]></ReturnType>
+					<Id>1725150971304</Id>
+					<Name><![CDATA[getShortestLinesWithoutContainingSameColor]]></Name>
+					<X>2900</X><Y>720</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[color]]></Name>
+						<Type><![CDATA[ColorOption]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[lines]]></Name>
+						<Type><![CDATA[ArrayList<Line>]]></Type>
+					</Parameter>
+					<Body><![CDATA[ArrayList<Line> withoutContainingShortestLines = new ArrayList<>();
+
+if (lines == null || lines.isEmpty()) {
+	return withoutContainingShortestLines;
+}
+
+for (Line l : lines) {
+	if (l.lastVehicleInLine == null) {
+		withoutContainingShortestLines.add(l);
+		continue;
+	}
+	
+	/*
+	for (Block b : l.blocks) {
+		if (b.vehicle != null && b.vehicle.color == color) {
+			break;
+		}
+	}*/
+	
+	for (Block b : l.blocks) {
+		if (b.vehicle != null && b.vehicle == l.lastVehicleInLine) {
+			continue;
+		}
+		if (b.vehicle != null && b.vehicle != l.lastVehicleInLine) {
+			if (b.vehicle.color != color) {
+				withoutContainingShortestLines.add(l);
+				break;
+			}
+		}
+	}
+	
+	
+	//withoutContainingShortestLines.add(l);
+}
+
+return withoutContainingShortestLines;]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -13821,6 +13963,7 @@ this.configNumberOfLines = value + 5;
 						<Button><![CDATA[inputStrategy1]]></Button>
 						<Button><![CDATA[inputStrategy1_2]]></Button>
 						<Button><![CDATA[inputStrategy2_2]]></Button>
+						<Button><![CDATA[inputStrategy3_1]]></Button>
 						<LinkTo>true</LinkTo>
 						<Link>configInputStrategy</Link>
 					</ExtendedProperties>
