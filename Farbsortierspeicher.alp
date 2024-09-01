@@ -14168,7 +14168,7 @@ this.configNumberOfLines = value + 5;
 		<!--   =========  Parameter Variation Experiment   ========  -->
 		<ParamVariationExperiment ActiveObjectClassId="1724158279004">
 			<Id>1725143800319</Id>
-			<Name><![CDATA[SimulationMultipleRuns]]></Name>
+			<Name><![CDATA[SimulationParameterVariation]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
@@ -14197,7 +14197,7 @@ this.configNumberOfLines = value + 5;
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Playground : Simulation1]]></Text>
+					<Text><![CDATA[Fallstudie in AnyLogic: Farbsortierspeicher - Parameter Variation]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
