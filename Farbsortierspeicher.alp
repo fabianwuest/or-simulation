@@ -12935,7 +12935,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["inputStrategy0"]]></Code>
+							<Code><![CDATA["inputStrategy1_2"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -12950,7 +12950,7 @@ insertInto(db_custom_stats)
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[String]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA["outputStrategy0"]]></Code>
+							<Code><![CDATA["outputStrategy2"]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -14957,7 +14957,7 @@ this.configNumberOfLines = value + 5;
 				<Id>1724773333537</Id>
 				<Type>FIXED</Type>
 				<Expression Class="CodeValue">
-					<Code><![CDATA["outputStrategy1_2"]]></Code>
+					<Code><![CDATA["outputStrategy2"]]></Code>
 				</Expression>
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
