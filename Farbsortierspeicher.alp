@@ -12792,7 +12792,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1724771803679</Id>
 					<Name><![CDATA[configNumberOfLines]]></Name>
-					<X>1020</X><Y>220</Y>
+					<X>1030</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12807,7 +12807,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1724773150651</Id>
 					<Name><![CDATA[configInputStrategy]]></Name>
-					<X>1020</X><Y>300</Y>
+					<X>1030</X><Y>90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12822,7 +12822,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1724773422366</Id>
 					<Name><![CDATA[configOutputStrategy]]></Name>
-					<X>1020</X><Y>380</Y>
+					<X>1030</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12837,7 +12837,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1724788773858</Id>
 					<Name><![CDATA[configColorVehicleDistribution]]></Name>
-					<X>1020</X><Y>450</Y>
+					<X>1030</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12852,7 +12852,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1724837674985</Id>
 					<Name><![CDATA[configMinFillLevel]]></Name>
-					<X>1020</X><Y>540</Y>
+					<X>1030</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12867,7 +12867,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1725124076905</Id>
 					<Name><![CDATA[configEmergencyStopMax]]></Name>
-					<X>170</X><Y>290</Y>
+					<X>1030</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12882,7 +12882,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1725124134944</Id>
 					<Name><![CDATA[configResumeAfterMax]]></Name>
-					<X>170</X><Y>380</Y>
+					<X>1030</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12897,7 +12897,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1725124137172</Id>
 					<Name><![CDATA[configEmergencyStopMin]]></Name>
-					<X>170</X><Y>460</Y>
+					<X>1030</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12912,7 +12912,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1725124139337</Id>
 					<Name><![CDATA[configResumeAfterMin]]></Name>
-					<X>170</X><Y>540</Y>
+					<X>1030</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12927,7 +12927,7 @@ insertInto(db_custom_stats)
 				<Variable Class="PlainVariable">
 					<Id>1725130144815</Id>
 					<Name><![CDATA[configSeedSetIdx]]></Name>
-					<X>170</X><Y>180</Y>
+					<X>1030</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12939,6 +12939,31 @@ insertInto(db_custom_stats)
 			</Variables>
 
 			<Shapes>
+				<RoundedRectangle>
+					<Id>1725146550479</Id>
+					<Name><![CDATA[roundRectangle]]></Name>
+					<X>550</X><Y>70</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Lock>true</Lock>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor/>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>460</Width>
+					<Height>520</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-2302756</FillColor>
+					<FillMaterial>null</FillMaterial>
+					<ArcRadius>10</ArcRadius>
+				</RoundedRectangle>
 				<Text>
 					<Id>1724158279007</Id>
 					<Name><![CDATA[text]]></Name>
@@ -12953,7 +12978,7 @@ insertInto(db_custom_stats)
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[Playground]]></Text>
+					<Text><![CDATA[Fallstudie in AnyLogic: Farbsortierspeicher]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -12964,7 +12989,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724771712231</Id>
 					<Name><![CDATA[labelNumberOfLines]]></Name>
-					<X>700</X><Y>180</Y>
+					<X>570</X><Y>120</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12986,7 +13011,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724772808048</Id>
 					<Name><![CDATA[text2]]></Name>
-					<X>700</X><Y>140</Y>
+					<X>570</X><Y>80</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13008,7 +13033,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724773091006</Id>
 					<Name><![CDATA[labelInputStrategy]]></Name>
-					<X>700</X><Y>260</Y>
+					<X>570</X><Y>200</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13030,7 +13055,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724773370764</Id>
 					<Name><![CDATA[labelOutputStrategy]]></Name>
-					<X>700</X><Y>340</Y>
+					<X>570</X><Y>280</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13052,7 +13077,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724788757412</Id>
 					<Name><![CDATA[labelColorVehicleDistribution]]></Name>
-					<X>700</X><Y>420</Y>
+					<X>570</X><Y>360</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13074,7 +13099,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724837687125</Id>
 					<Name><![CDATA[labelMinFillLevel]]></Name>
-					<X>700</X><Y>500</Y>
+					<X>570</X><Y>440</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13096,7 +13121,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724837995681</Id>
 					<Name><![CDATA[text1]]></Name>
-					<X>700</X><Y>550</Y>
+					<X>570</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13119,7 +13144,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724837995686</Id>
 					<Name><![CDATA[text3]]></Name>
-					<X>840</X><Y>550</Y>
+					<X>710</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13142,7 +13167,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1724837995687</Id>
 					<Name><![CDATA[text4]]></Name>
-					<X>770</X><Y>550</Y>
+					<X>640</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13165,7 +13190,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725123994543</Id>
 					<Name><![CDATA[labelEmergencyStopMax]]></Name>
-					<X>350</X><Y>260</Y>
+					<X>810</X><Y>190</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13187,7 +13212,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725124145411</Id>
 					<Name><![CDATA[labelResumeAfterMax]]></Name>
-					<X>350</X><Y>340</Y>
+					<X>810</X><Y>270</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13209,7 +13234,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725124158232</Id>
 					<Name><![CDATA[labelEmergencyStopMin]]></Name>
-					<X>350</X><Y>430</Y>
+					<X>810</X><Y>360</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13231,7 +13256,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725124166502</Id>
 					<Name><![CDATA[labelResumeAfterMin]]></Name>
-					<X>350</X><Y>510</Y>
+					<X>810</X><Y>440</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13253,7 +13278,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125533677</Id>
 					<Name><![CDATA[text5]]></Name>
-					<X>350</X><Y>310</Y>
+					<X>810</X><Y>240</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13276,7 +13301,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125533696</Id>
 					<Name><![CDATA[text6]]></Name>
-					<X>490</X><Y>310</Y>
+					<X>950</X><Y>240</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13299,7 +13324,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125533700</Id>
 					<Name><![CDATA[text7]]></Name>
-					<X>420</X><Y>310</Y>
+					<X>880</X><Y>240</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13322,7 +13347,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125537239</Id>
 					<Name><![CDATA[text8]]></Name>
-					<X>350</X><Y>400</Y>
+					<X>810</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13345,7 +13370,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125537244</Id>
 					<Name><![CDATA[text9]]></Name>
-					<X>490</X><Y>400</Y>
+					<X>950</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13368,7 +13393,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125537245</Id>
 					<Name><![CDATA[text10]]></Name>
-					<X>420</X><Y>400</Y>
+					<X>880</X><Y>330</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13391,7 +13416,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125541142</Id>
 					<Name><![CDATA[text11]]></Name>
-					<X>350</X><Y>480</Y>
+					<X>810</X><Y>410</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13414,7 +13439,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125541146</Id>
 					<Name><![CDATA[text12]]></Name>
-					<X>490</X><Y>480</Y>
+					<X>950</X><Y>410</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13437,7 +13462,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125541148</Id>
 					<Name><![CDATA[text13]]></Name>
-					<X>420</X><Y>480</Y>
+					<X>880</X><Y>410</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13460,7 +13485,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125546254</Id>
 					<Name><![CDATA[text14]]></Name>
-					<X>350</X><Y>560</Y>
+					<X>810</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13483,7 +13508,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125546259</Id>
 					<Name><![CDATA[text15]]></Name>
-					<X>490</X><Y>560</Y>
+					<X>950</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13506,7 +13531,7 @@ insertInto(db_custom_stats)
 				<Text>
 					<Id>1725125546260</Id>
 					<Name><![CDATA[text16]]></Name>
-					<X>420</X><Y>560</Y>
+					<X>880</X><Y>490</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13526,6 +13551,191 @@ insertInto(db_custom_stats)
 					</Font>
 					<Alignment>CENTER</Alignment>
 				</Text>
+				<Text>
+					<Id>1725145997980</Id>
+					<Name><![CDATA[text17]]></Name>
+					<X>1010</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Configurable Model Parameters]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Line>
+					<Id>1725146281005</Id>
+					<Name><![CDATA[line]]></Name>
+					<X>790</X><Y>120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-16777216</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<BeginArrowSize>1</BeginArrowSize>
+					<BeginArrowStyle>0</BeginArrowStyle>
+					<EndArrowSize>1</EndArrowSize>
+					<EndArrowStyle>0</EndArrowStyle>
+					<Dx>0</Dx>
+					<Dy>390</Dy>
+					<Dz>0</Dz>
+				</Line>
+				<Text>
+					<Id>1725146296414</Id>
+					<Name><![CDATA[labelSeedSet]]></Name>
+					<X>810</X><Y>120</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Seed Set:]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>11</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725149509784</Id>
+					<Name><![CDATA[text21]]></Name>
+					<X>40</X><Y>560</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Ereignisdiskrete Simulation in Produktion und Logistik (SoSe 2024)
+Frederik Beck, José Ricardo Castro, Fabian Alexander Wüst]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Group>
+					<Id>1725149624241</Id>
+					<Name><![CDATA[group]]></Name>
+					<X>290</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Shapes>
+				<Text>
+					<Id>1725147081338</Id>
+					<Name><![CDATA[text18]]></Name>
+					<X>-250</X><Y>-100</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Modellbeschreibung]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725147125127</Id>
+					<Name><![CDATA[text19]]></Name>
+					<X>-250</X><Y>-80</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Fahrzeuge in der Lackiererei eines Automobilwerks erhalten ihren Farbauftrag, 
+die sogenannte Decklackfarbe, in der Decklacklinie. Ein Farbwechsel zwischen 
+zwei zu lackierenden Fahrzeugen verursacht Rüstkosten, da die Lackierausrüstung 
+gereinigt und sowohl Reinigungsmittel als auch überschüssige Farbe entsorgt 
+werden müssen. Um unnötige Rüstkosten zu vermeiden, sollen möglichst viele 
+Fahrzeuge hintereinander in derselben Farbe lackiert werden.]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1725149224459</Id>
+					<Name><![CDATA[text20]]></Name>
+					<X>-250</X><Y>20</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Dieses Simulationsmodell unterstützt einen Automobilhersteller bei der Gestaltung
+eines Farbsortierspeichers. Das Modell simuliert einen Speicher mit sechs parallelen 
+Linien und je acht Plätzen. Fahrzeuge in verschiedenen Farben werden eingelagert 
+und anschließend in einer Reihenfolge zur Decklacklinie geleitet, die die Anzahl der 
+Farbwechsel reduziert.]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>12</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Shapes>
+
+				</Group>
 			</Shapes>
 			<Controls>
 				<Control Type="Button">
@@ -13559,7 +13769,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1724771624319</Id>
 					<Name><![CDATA[radioNumberOfLines]]></Name>
-					<X>700</X><Y>200</Y>
+					<X>570</X><Y>140</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13592,7 +13802,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1724773118520</Id>
 					<Name><![CDATA[comboboxInputStrategy]]></Name>
-					<X>700</X><Y>290</Y>
+					<X>570</X><Y>230</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13619,7 +13829,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1724773392723</Id>
 					<Name><![CDATA[comboboxOutputStrategy]]></Name>
-					<X>700</X><Y>370</Y>
+					<X>570</X><Y>310</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13646,7 +13856,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1724788750094</Id>
 					<Name><![CDATA[comboboxColorVehicleDistribution]]></Name>
-					<X>700</X><Y>450</Y>
+					<X>570</X><Y>390</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13671,7 +13881,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1724837682743</Id>
 					<Name><![CDATA[sliderMinFillLevel]]></Name>
-					<X>700</X><Y>520</Y>
+					<X>570</X><Y>460</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13695,7 +13905,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725110594340</Id>
 					<Name><![CDATA[buttonDBCustomStats]]></Name>
-					<X>10</X><Y>620</Y>
+					<X>860</X><Y>540</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13717,7 +13927,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725123953266</Id>
 					<Name><![CDATA[sliderEmergencyStopMax]]></Name>
-					<X>350</X><Y>280</Y>
+					<X>810</X><Y>210</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13741,7 +13951,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725124221537</Id>
 					<Name><![CDATA[sliderResumeAfterMax]]></Name>
-					<X>350</X><Y>370</Y>
+					<X>810</X><Y>300</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13765,7 +13975,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725124224959</Id>
 					<Name><![CDATA[sliderEmergencyStopMin]]></Name>
-					<X>350</X><Y>450</Y>
+					<X>810</X><Y>380</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13789,7 +13999,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725124227854</Id>
 					<Name><![CDATA[sliderResumeAfterMin]]></Name>
-					<X>350</X><Y>530</Y>
+					<X>810</X><Y>460</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -13813,7 +14023,7 @@ this.configNumberOfLines = value + 5;
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1725129941383</Id>
 					<Name><![CDATA[comboboxSeedSet]]></Name>
-					<X>350</X><Y>170</Y>
+					<X>810</X><Y>150</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
